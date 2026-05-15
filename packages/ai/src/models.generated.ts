@@ -56,23 +56,6 @@ export const MODELS = {
 			contextWindow: 128000,
 			maxTokens: 8192,
 		} satisfies Model<"bedrock-converse-stream">,
-		"amazon.nova-premier-v1:0": {
-			id: "amazon.nova-premier-v1:0",
-			name: "Nova Premier",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: true,
-			input: ["text", "image"],
-			cost: {
-				input: 2.5,
-				output: 12.5,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 1000000,
-			maxTokens: 16384,
-		} satisfies Model<"bedrock-converse-stream">,
 		"amazon.nova-pro-v1:0": {
 			id: "amazon.nova-pro-v1:0",
 			name: "Nova Pro",
@@ -89,91 +72,6 @@ export const MODELS = {
 			},
 			contextWindow: 300000,
 			maxTokens: 8192,
-		} satisfies Model<"bedrock-converse-stream">,
-		"anthropic.claude-3-5-haiku-20241022-v1:0": {
-			id: "anthropic.claude-3-5-haiku-20241022-v1:0",
-			name: "Claude Haiku 3.5",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: false,
-			input: ["text", "image"],
-			cost: {
-				input: 0.8,
-				output: 4,
-				cacheRead: 0.08,
-				cacheWrite: 1,
-			},
-			contextWindow: 200000,
-			maxTokens: 8192,
-		} satisfies Model<"bedrock-converse-stream">,
-		"anthropic.claude-3-5-sonnet-20240620-v1:0": {
-			id: "anthropic.claude-3-5-sonnet-20240620-v1:0",
-			name: "Claude Sonnet 3.5",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: false,
-			input: ["text", "image"],
-			cost: {
-				input: 3,
-				output: 15,
-				cacheRead: 0.3,
-				cacheWrite: 3.75,
-			},
-			contextWindow: 200000,
-			maxTokens: 8192,
-		} satisfies Model<"bedrock-converse-stream">,
-		"anthropic.claude-3-5-sonnet-20241022-v2:0": {
-			id: "anthropic.claude-3-5-sonnet-20241022-v2:0",
-			name: "Claude Sonnet 3.5 v2",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: false,
-			input: ["text", "image"],
-			cost: {
-				input: 3,
-				output: 15,
-				cacheRead: 0.3,
-				cacheWrite: 3.75,
-			},
-			contextWindow: 200000,
-			maxTokens: 8192,
-		} satisfies Model<"bedrock-converse-stream">,
-		"anthropic.claude-3-7-sonnet-20250219-v1:0": {
-			id: "anthropic.claude-3-7-sonnet-20250219-v1:0",
-			name: "Claude Sonnet 3.7",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: false,
-			input: ["text", "image"],
-			cost: {
-				input: 3,
-				output: 15,
-				cacheRead: 0.3,
-				cacheWrite: 3.75,
-			},
-			contextWindow: 200000,
-			maxTokens: 8192,
-		} satisfies Model<"bedrock-converse-stream">,
-		"anthropic.claude-3-haiku-20240307-v1:0": {
-			id: "anthropic.claude-3-haiku-20240307-v1:0",
-			name: "Claude Haiku 3",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: false,
-			input: ["text", "image"],
-			cost: {
-				input: 0.25,
-				output: 1.25,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 200000,
-			maxTokens: 4096,
 		} satisfies Model<"bedrock-converse-stream">,
 		"anthropic.claude-haiku-4-5-20251001-v1:0": {
 			id: "anthropic.claude-haiku-4-5-20251001-v1:0",
@@ -195,23 +93,6 @@ export const MODELS = {
 		"anthropic.claude-opus-4-1-20250805-v1:0": {
 			id: "anthropic.claude-opus-4-1-20250805-v1:0",
 			name: "Claude Opus 4.1",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: true,
-			input: ["text", "image"],
-			cost: {
-				input: 15,
-				output: 75,
-				cacheRead: 1.5,
-				cacheWrite: 18.75,
-			},
-			contextWindow: 200000,
-			maxTokens: 32000,
-		} satisfies Model<"bedrock-converse-stream">,
-		"anthropic.claude-opus-4-20250514-v1:0": {
-			id: "anthropic.claude-opus-4-20250514-v1:0",
-			name: "Claude Opus 4",
 			api: "bedrock-converse-stream",
 			provider: "amazon-bedrock",
 			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
@@ -279,23 +160,6 @@ export const MODELS = {
 			contextWindow: 1000000,
 			maxTokens: 128000,
 		} satisfies Model<"bedrock-converse-stream">,
-		"anthropic.claude-sonnet-4-20250514-v1:0": {
-			id: "anthropic.claude-sonnet-4-20250514-v1:0",
-			name: "Claude Sonnet 4",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: true,
-			input: ["text", "image"],
-			cost: {
-				input: 3,
-				output: 15,
-				cacheRead: 0.3,
-				cacheWrite: 3.75,
-			},
-			contextWindow: 200000,
-			maxTokens: 64000,
-		} satisfies Model<"bedrock-converse-stream">,
 		"anthropic.claude-sonnet-4-5-20250929-v1:0": {
 			id: "anthropic.claude-sonnet-4-5-20250929-v1:0",
 			name: "Claude Sonnet 4.5",
@@ -330,6 +194,23 @@ export const MODELS = {
 			contextWindow: 1000000,
 			maxTokens: 64000,
 		} satisfies Model<"bedrock-converse-stream">,
+		"au.anthropic.claude-haiku-4-5-20251001-v1:0": {
+			id: "au.anthropic.claude-haiku-4-5-20251001-v1:0",
+			name: "Claude Haiku 4.5 (AU)",
+			api: "bedrock-converse-stream",
+			provider: "amazon-bedrock",
+			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+			reasoning: true,
+			input: ["text", "image"],
+			cost: {
+				input: 1,
+				output: 5,
+				cacheRead: 0.1,
+				cacheWrite: 1.25,
+			},
+			contextWindow: 200000,
+			maxTokens: 64000,
+		} satisfies Model<"bedrock-converse-stream">,
 		"au.anthropic.claude-opus-4-6-v1": {
 			id: "au.anthropic.claude-opus-4-6-v1",
 			name: "AU Anthropic Claude Opus 4.6",
@@ -347,6 +228,23 @@ export const MODELS = {
 			},
 			contextWindow: 1000000,
 			maxTokens: 128000,
+		} satisfies Model<"bedrock-converse-stream">,
+		"au.anthropic.claude-sonnet-4-5-20250929-v1:0": {
+			id: "au.anthropic.claude-sonnet-4-5-20250929-v1:0",
+			name: "Claude Sonnet 4.5 (AU)",
+			api: "bedrock-converse-stream",
+			provider: "amazon-bedrock",
+			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+			reasoning: true,
+			input: ["text", "image"],
+			cost: {
+				input: 3,
+				output: 15,
+				cacheRead: 0.3,
+				cacheWrite: 3.75,
+			},
+			contextWindow: 200000,
+			maxTokens: 64000,
 		} satisfies Model<"bedrock-converse-stream">,
 		"au.anthropic.claude-sonnet-4-6": {
 			id: "au.anthropic.claude-sonnet-4-6",
@@ -486,23 +384,6 @@ export const MODELS = {
 			contextWindow: 1000000,
 			maxTokens: 128000,
 		} satisfies Model<"bedrock-converse-stream">,
-		"eu.anthropic.claude-sonnet-4-20250514-v1:0": {
-			id: "eu.anthropic.claude-sonnet-4-20250514-v1:0",
-			name: "Claude Sonnet 4 (EU)",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.eu-central-1.amazonaws.com",
-			reasoning: true,
-			input: ["text", "image"],
-			cost: {
-				input: 3,
-				output: 15,
-				cacheRead: 0.3,
-				cacheWrite: 3.75,
-			},
-			contextWindow: 200000,
-			maxTokens: 64000,
-		} satisfies Model<"bedrock-converse-stream">,
 		"eu.anthropic.claude-sonnet-4-5-20250929-v1:0": {
 			id: "eu.anthropic.claude-sonnet-4-5-20250929-v1:0",
 			name: "Claude Sonnet 4.5 (EU)",
@@ -607,23 +488,6 @@ export const MODELS = {
 			contextWindow: 1000000,
 			maxTokens: 128000,
 		} satisfies Model<"bedrock-converse-stream">,
-		"global.anthropic.claude-sonnet-4-20250514-v1:0": {
-			id: "global.anthropic.claude-sonnet-4-20250514-v1:0",
-			name: "Claude Sonnet 4 (Global)",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: true,
-			input: ["text", "image"],
-			cost: {
-				input: 3,
-				output: 15,
-				cacheRead: 0.3,
-				cacheWrite: 3.75,
-			},
-			contextWindow: 200000,
-			maxTokens: 64000,
-		} satisfies Model<"bedrock-converse-stream">,
 		"global.anthropic.claude-sonnet-4-5-20250929-v1:0": {
 			id: "global.anthropic.claude-sonnet-4-5-20250929-v1:0",
 			name: "Claude Sonnet 4.5 (Global)",
@@ -692,22 +556,57 @@ export const MODELS = {
 			contextWindow: 128000,
 			maxTokens: 4096,
 		} satisfies Model<"bedrock-converse-stream">,
-		"meta.llama3-1-405b-instruct-v1:0": {
-			id: "meta.llama3-1-405b-instruct-v1:0",
-			name: "Llama 3.1 405B Instruct",
+		"jp.anthropic.claude-opus-4-7": {
+			id: "jp.anthropic.claude-opus-4-7",
+			name: "Claude Opus 4.7 (JP)",
 			api: "bedrock-converse-stream",
 			provider: "amazon-bedrock",
 			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: false,
-			input: ["text"],
+			reasoning: true,
+			thinkingLevelMap: {"xhigh":"xhigh"},
+			input: ["text", "image"],
 			cost: {
-				input: 2.4,
-				output: 2.4,
-				cacheRead: 0,
-				cacheWrite: 0,
+				input: 5,
+				output: 25,
+				cacheRead: 0.5,
+				cacheWrite: 6.25,
 			},
-			contextWindow: 128000,
-			maxTokens: 4096,
+			contextWindow: 1000000,
+			maxTokens: 128000,
+		} satisfies Model<"bedrock-converse-stream">,
+		"jp.anthropic.claude-sonnet-4-5-20250929-v1:0": {
+			id: "jp.anthropic.claude-sonnet-4-5-20250929-v1:0",
+			name: "Claude Sonnet 4.5 (JP)",
+			api: "bedrock-converse-stream",
+			provider: "amazon-bedrock",
+			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+			reasoning: true,
+			input: ["text", "image"],
+			cost: {
+				input: 3,
+				output: 15,
+				cacheRead: 0.3,
+				cacheWrite: 3.75,
+			},
+			contextWindow: 200000,
+			maxTokens: 64000,
+		} satisfies Model<"bedrock-converse-stream">,
+		"jp.anthropic.claude-sonnet-4-6": {
+			id: "jp.anthropic.claude-sonnet-4-6",
+			name: "Claude Sonnet 4.6 (JP)",
+			api: "bedrock-converse-stream",
+			provider: "amazon-bedrock",
+			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+			reasoning: true,
+			input: ["text", "image"],
+			cost: {
+				input: 3,
+				output: 15,
+				cacheRead: 0.3,
+				cacheWrite: 3.75,
+			},
+			contextWindow: 1000000,
+			maxTokens: 64000,
 		} satisfies Model<"bedrock-converse-stream">,
 		"meta.llama3-1-70b-instruct-v1:0": {
 			id: "meta.llama3-1-70b-instruct-v1:0",
@@ -737,74 +636,6 @@ export const MODELS = {
 			cost: {
 				input: 0.22,
 				output: 0.22,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 128000,
-			maxTokens: 4096,
-		} satisfies Model<"bedrock-converse-stream">,
-		"meta.llama3-2-11b-instruct-v1:0": {
-			id: "meta.llama3-2-11b-instruct-v1:0",
-			name: "Llama 3.2 11B Instruct",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: false,
-			input: ["text", "image"],
-			cost: {
-				input: 0.16,
-				output: 0.16,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 128000,
-			maxTokens: 4096,
-		} satisfies Model<"bedrock-converse-stream">,
-		"meta.llama3-2-1b-instruct-v1:0": {
-			id: "meta.llama3-2-1b-instruct-v1:0",
-			name: "Llama 3.2 1B Instruct",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: false,
-			input: ["text"],
-			cost: {
-				input: 0.1,
-				output: 0.1,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 131000,
-			maxTokens: 4096,
-		} satisfies Model<"bedrock-converse-stream">,
-		"meta.llama3-2-3b-instruct-v1:0": {
-			id: "meta.llama3-2-3b-instruct-v1:0",
-			name: "Llama 3.2 3B Instruct",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: false,
-			input: ["text"],
-			cost: {
-				input: 0.15,
-				output: 0.15,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 131000,
-			maxTokens: 4096,
-		} satisfies Model<"bedrock-converse-stream">,
-		"meta.llama3-2-90b-instruct-v1:0": {
-			id: "meta.llama3-2-90b-instruct-v1:0",
-			name: "Llama 3.2 90B Instruct",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: false,
-			input: ["text", "image"],
-			cost: {
-				input: 0.72,
-				output: 0.72,
 				cacheRead: 0,
 				cacheWrite: 0,
 			},
@@ -1183,7 +1014,7 @@ export const MODELS = {
 				cacheWrite: 0,
 			},
 			contextWindow: 128000,
-			maxTokens: 4096,
+			maxTokens: 16384,
 		} satisfies Model<"bedrock-converse-stream">,
 		"openai.gpt-oss-20b-1:0": {
 			id: "openai.gpt-oss-20b-1:0",
@@ -1200,7 +1031,7 @@ export const MODELS = {
 				cacheWrite: 0,
 			},
 			contextWindow: 128000,
-			maxTokens: 4096,
+			maxTokens: 16384,
 		} satisfies Model<"bedrock-converse-stream">,
 		"openai.gpt-oss-safeguard-120b": {
 			id: "openai.gpt-oss-safeguard-120b",
@@ -1217,7 +1048,7 @@ export const MODELS = {
 				cacheWrite: 0,
 			},
 			contextWindow: 128000,
-			maxTokens: 4096,
+			maxTokens: 16384,
 		} satisfies Model<"bedrock-converse-stream">,
 		"openai.gpt-oss-safeguard-20b": {
 			id: "openai.gpt-oss-safeguard-20b",
@@ -1234,7 +1065,7 @@ export const MODELS = {
 				cacheWrite: 0,
 			},
 			contextWindow: 128000,
-			maxTokens: 4096,
+			maxTokens: 16384,
 		} satisfies Model<"bedrock-converse-stream">,
 		"qwen.qwen3-235b-a22b-2507-v1:0": {
 			id: "qwen.qwen3-235b-a22b-2507-v1:0",
@@ -1389,23 +1220,6 @@ export const MODELS = {
 			contextWindow: 200000,
 			maxTokens: 32000,
 		} satisfies Model<"bedrock-converse-stream">,
-		"us.anthropic.claude-opus-4-20250514-v1:0": {
-			id: "us.anthropic.claude-opus-4-20250514-v1:0",
-			name: "Claude Opus 4 (US)",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: true,
-			input: ["text", "image"],
-			cost: {
-				input: 15,
-				output: 75,
-				cacheRead: 1.5,
-				cacheWrite: 18.75,
-			},
-			contextWindow: 200000,
-			maxTokens: 32000,
-		} satisfies Model<"bedrock-converse-stream">,
 		"us.anthropic.claude-opus-4-5-20251101-v1:0": {
 			id: "us.anthropic.claude-opus-4-5-20251101-v1:0",
 			name: "Claude Opus 4.5 (US)",
@@ -1459,23 +1273,6 @@ export const MODELS = {
 			contextWindow: 1000000,
 			maxTokens: 128000,
 		} satisfies Model<"bedrock-converse-stream">,
-		"us.anthropic.claude-sonnet-4-20250514-v1:0": {
-			id: "us.anthropic.claude-sonnet-4-20250514-v1:0",
-			name: "Claude Sonnet 4 (US)",
-			api: "bedrock-converse-stream",
-			provider: "amazon-bedrock",
-			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
-			reasoning: true,
-			input: ["text", "image"],
-			cost: {
-				input: 3,
-				output: 15,
-				cacheRead: 0.3,
-				cacheWrite: 3.75,
-			},
-			contextWindow: 200000,
-			maxTokens: 64000,
-		} satisfies Model<"bedrock-converse-stream">,
 		"us.anthropic.claude-sonnet-4-5-20250929-v1:0": {
 			id: "us.anthropic.claude-sonnet-4-5-20250929-v1:0",
 			name: "Claude Sonnet 4.5 (US)",
@@ -1509,6 +1306,57 @@ export const MODELS = {
 			},
 			contextWindow: 1000000,
 			maxTokens: 64000,
+		} satisfies Model<"bedrock-converse-stream">,
+		"us.deepseek.r1-v1:0": {
+			id: "us.deepseek.r1-v1:0",
+			name: "DeepSeek-R1 (US)",
+			api: "bedrock-converse-stream",
+			provider: "amazon-bedrock",
+			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+			reasoning: true,
+			input: ["text"],
+			cost: {
+				input: 1.35,
+				output: 5.4,
+				cacheRead: 0,
+				cacheWrite: 0,
+			},
+			contextWindow: 128000,
+			maxTokens: 32768,
+		} satisfies Model<"bedrock-converse-stream">,
+		"us.meta.llama4-maverick-17b-instruct-v1:0": {
+			id: "us.meta.llama4-maverick-17b-instruct-v1:0",
+			name: "Llama 4 Maverick 17B Instruct (US)",
+			api: "bedrock-converse-stream",
+			provider: "amazon-bedrock",
+			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+			reasoning: false,
+			input: ["text", "image"],
+			cost: {
+				input: 0.24,
+				output: 0.97,
+				cacheRead: 0,
+				cacheWrite: 0,
+			},
+			contextWindow: 1000000,
+			maxTokens: 16384,
+		} satisfies Model<"bedrock-converse-stream">,
+		"us.meta.llama4-scout-17b-instruct-v1:0": {
+			id: "us.meta.llama4-scout-17b-instruct-v1:0",
+			name: "Llama 4 Scout 17B Instruct (US)",
+			api: "bedrock-converse-stream",
+			provider: "amazon-bedrock",
+			baseUrl: "https://bedrock-runtime.us-east-1.amazonaws.com",
+			reasoning: false,
+			input: ["text", "image"],
+			cost: {
+				input: 0.17,
+				output: 0.66,
+				cacheRead: 0,
+				cacheWrite: 0,
+			},
+			contextWindow: 3500000,
+			maxTokens: 16384,
 		} satisfies Model<"bedrock-converse-stream">,
 		"writer.palmyra-x4-v1:0": {
 			id: "writer.palmyra-x4-v1:0",
@@ -1604,7 +1452,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.8,
 				output: 4,
@@ -1621,7 +1469,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.8,
 				output: 4,
@@ -1638,7 +1486,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -1655,7 +1503,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -1672,7 +1520,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -1689,7 +1537,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.25,
 				output: 1.25,
@@ -1706,7 +1554,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 75,
@@ -1723,7 +1571,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -1740,7 +1588,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1,
 				output: 5,
@@ -1757,7 +1605,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1,
 				output: 5,
@@ -1774,7 +1622,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 75,
@@ -1791,7 +1639,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 75,
@@ -1808,7 +1656,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 75,
@@ -1825,7 +1673,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 75,
@@ -1842,7 +1690,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 25,
@@ -1859,7 +1707,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 25,
@@ -1877,7 +1725,7 @@ export const MODELS = {
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"max"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 25,
@@ -1895,7 +1743,7 @@ export const MODELS = {
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 25,
@@ -1912,7 +1760,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -1929,7 +1777,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -1946,7 +1794,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -1963,7 +1811,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -1980,7 +1828,7 @@ export const MODELS = {
 			provider: "anthropic",
 			baseUrl: "https://api.anthropic.com",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -2033,7 +1881,7 @@ export const MODELS = {
 			provider: "azure-openai-responses",
 			baseUrl: "",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2,
 				output: 8,
@@ -2050,7 +1898,7 @@ export const MODELS = {
 			provider: "azure-openai-responses",
 			baseUrl: "",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.4,
 				output: 1.6,
@@ -2084,7 +1932,7 @@ export const MODELS = {
 			provider: "azure-openai-responses",
 			baseUrl: "",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2.5,
 				output: 10,
@@ -2152,7 +2000,7 @@ export const MODELS = {
 			provider: "azure-openai-responses",
 			baseUrl: "",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.15,
 				output: 0.6,
@@ -2404,7 +2252,7 @@ export const MODELS = {
 			baseUrl: "",
 			reasoning: true,
 			thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -2458,7 +2306,7 @@ export const MODELS = {
 			baseUrl: "",
 			reasoning: true,
 			thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -2476,7 +2324,7 @@ export const MODELS = {
 			baseUrl: "",
 			reasoning: true,
 			thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -2494,7 +2342,7 @@ export const MODELS = {
 			baseUrl: "",
 			reasoning: true,
 			thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2.5,
 				output: 15,
@@ -2566,7 +2414,7 @@ export const MODELS = {
 			baseUrl: "",
 			reasoning: true,
 			thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 30,
@@ -2584,7 +2432,7 @@ export const MODELS = {
 			baseUrl: "",
 			reasoning: true,
 			thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 30,
 				output: 180,
@@ -2601,7 +2449,7 @@ export const MODELS = {
 			provider: "azure-openai-responses",
 			baseUrl: "",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 60,
@@ -2635,7 +2483,7 @@ export const MODELS = {
 			provider: "azure-openai-responses",
 			baseUrl: "",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2,
 				output: 8,
@@ -3604,6 +3452,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3614,12 +3463,6 @@ export const MODELS = {
 			},
 			contextWindow: 163840,
 			maxTokens: 163840,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/deepseek-v3p2": {
 			id: "accounts/fireworks/models/deepseek-v3p2",
@@ -3627,6 +3470,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3637,12 +3481,6 @@ export const MODELS = {
 			},
 			contextWindow: 160000,
 			maxTokens: 160000,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/deepseek-v4-pro": {
 			id: "accounts/fireworks/models/deepseek-v4-pro",
@@ -3650,6 +3488,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3660,12 +3499,6 @@ export const MODELS = {
 			},
 			contextWindow: 1000000,
 			maxTokens: 384000,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/glm-4p5": {
 			id: "accounts/fireworks/models/glm-4p5",
@@ -3673,6 +3506,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3683,12 +3517,6 @@ export const MODELS = {
 			},
 			contextWindow: 131072,
 			maxTokens: 131072,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/glm-4p5-air": {
 			id: "accounts/fireworks/models/glm-4p5-air",
@@ -3696,6 +3524,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3706,12 +3535,6 @@ export const MODELS = {
 			},
 			contextWindow: 131072,
 			maxTokens: 131072,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/glm-4p7": {
 			id: "accounts/fireworks/models/glm-4p7",
@@ -3719,6 +3542,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3729,12 +3553,6 @@ export const MODELS = {
 			},
 			contextWindow: 198000,
 			maxTokens: 198000,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/glm-5": {
 			id: "accounts/fireworks/models/glm-5",
@@ -3742,6 +3560,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3752,12 +3571,6 @@ export const MODELS = {
 			},
 			contextWindow: 202752,
 			maxTokens: 131072,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/glm-5p1": {
 			id: "accounts/fireworks/models/glm-5p1",
@@ -3765,6 +3578,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3775,12 +3589,6 @@ export const MODELS = {
 			},
 			contextWindow: 202800,
 			maxTokens: 131072,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/gpt-oss-120b": {
 			id: "accounts/fireworks/models/gpt-oss-120b",
@@ -3788,6 +3596,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3798,12 +3607,6 @@ export const MODELS = {
 			},
 			contextWindow: 131072,
 			maxTokens: 32768,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/gpt-oss-20b": {
 			id: "accounts/fireworks/models/gpt-oss-20b",
@@ -3811,6 +3614,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3821,12 +3625,6 @@ export const MODELS = {
 			},
 			contextWindow: 131072,
 			maxTokens: 32768,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/kimi-k2-instruct": {
 			id: "accounts/fireworks/models/kimi-k2-instruct",
@@ -3834,6 +3632,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: false,
 			input: ["text"],
 			cost: {
@@ -3844,12 +3643,6 @@ export const MODELS = {
 			},
 			contextWindow: 128000,
 			maxTokens: 16384,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/kimi-k2-thinking": {
 			id: "accounts/fireworks/models/kimi-k2-thinking",
@@ -3857,6 +3650,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3867,12 +3661,6 @@ export const MODELS = {
 			},
 			contextWindow: 256000,
 			maxTokens: 256000,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/kimi-k2p5": {
 			id: "accounts/fireworks/models/kimi-k2p5",
@@ -3880,6 +3668,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text", "image"],
 			cost: {
@@ -3890,12 +3679,6 @@ export const MODELS = {
 			},
 			contextWindow: 256000,
 			maxTokens: 256000,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/kimi-k2p6": {
 			id: "accounts/fireworks/models/kimi-k2p6",
@@ -3903,6 +3686,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text", "image"],
 			cost: {
@@ -3913,12 +3697,6 @@ export const MODELS = {
 			},
 			contextWindow: 262000,
 			maxTokens: 262000,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/minimax-m2p1": {
 			id: "accounts/fireworks/models/minimax-m2p1",
@@ -3926,6 +3704,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3936,12 +3715,6 @@ export const MODELS = {
 			},
 			contextWindow: 200000,
 			maxTokens: 200000,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/minimax-m2p5": {
 			id: "accounts/fireworks/models/minimax-m2p5",
@@ -3949,6 +3722,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3959,12 +3733,6 @@ export const MODELS = {
 			},
 			contextWindow: 196608,
 			maxTokens: 196608,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/minimax-m2p7": {
 			id: "accounts/fireworks/models/minimax-m2p7",
@@ -3972,6 +3740,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -3982,12 +3751,6 @@ export const MODELS = {
 			},
 			contextWindow: 196608,
 			maxTokens: 196608,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/models/qwen3p6-plus": {
 			id: "accounts/fireworks/models/qwen3p6-plus",
@@ -3995,6 +3758,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text", "image"],
 			cost: {
@@ -4005,12 +3769,6 @@ export const MODELS = {
 			},
 			contextWindow: 128000,
 			maxTokens: 8192,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 		"accounts/fireworks/routers/kimi-k2p5-turbo": {
 			id: "accounts/fireworks/routers/kimi-k2p5-turbo",
@@ -4018,6 +3776,7 @@ export const MODELS = {
 			api: "anthropic-messages",
 			provider: "fireworks",
 			baseUrl: "https://api.fireworks.ai/inference",
+			compat: {"sendSessionAffinityHeaders":true,"supportsEagerToolInputStreaming":false,"supportsCacheControlOnTools":false,"supportsLongCacheRetention":false},
 			reasoning: true,
 			input: ["text", "image"],
 			cost: {
@@ -4028,12 +3787,6 @@ export const MODELS = {
 			},
 			contextWindow: 256000,
 			maxTokens: 256000,
-			compat: {
-				sendSessionAffinityHeaders: true,
-				supportsEagerToolInputStreaming: false,
-				supportsCacheControlOnTools: false,
-				supportsLongCacheRetention: false,
-			},
 		} satisfies Model<"anthropic-messages">,
 	},
 	"github-copilot": {
@@ -4112,25 +3865,6 @@ export const MODELS = {
 			contextWindow: 144000,
 			maxTokens: 64000,
 		} satisfies Model<"anthropic-messages">,
-		"claude-sonnet-4": {
-			id: "claude-sonnet-4",
-			name: "Claude Sonnet 4",
-			api: "anthropic-messages",
-			provider: "github-copilot",
-			baseUrl: "https://api.individual.githubcopilot.com",
-			headers: {"User-Agent":"GitHubCopilotChat/0.35.0","Editor-Version":"vscode/1.107.0","Editor-Plugin-Version":"copilot-chat/0.35.0","Copilot-Integration-Id":"vscode-chat"},
-			compat: {"supportsEagerToolInputStreaming":false},
-			reasoning: true,
-			input: ["text", "image"],
-			cost: {
-				input: 0,
-				output: 0,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 216000,
-			maxTokens: 16000,
-		} satisfies Model<"anthropic-messages">,
 		"claude-sonnet-4.5": {
 			id: "claude-sonnet-4.5",
 			name: "Claude Sonnet 4.5",
@@ -4206,25 +3940,6 @@ export const MODELS = {
 			contextWindow: 128000,
 			maxTokens: 64000,
 		} satisfies Model<"openai-completions">,
-		"gemini-3-pro-preview": {
-			id: "gemini-3-pro-preview",
-			name: "Gemini 3 Pro Preview",
-			api: "openai-completions",
-			provider: "github-copilot",
-			baseUrl: "https://api.individual.githubcopilot.com",
-			headers: {"User-Agent":"GitHubCopilotChat/0.35.0","Editor-Version":"vscode/1.107.0","Editor-Plugin-Version":"copilot-chat/0.35.0","Copilot-Integration-Id":"vscode-chat"},
-			compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false},
-			reasoning: true,
-			input: ["text", "image"],
-			cost: {
-				input: 0,
-				output: 0,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 128000,
-			maxTokens: 64000,
-		} satisfies Model<"openai-completions">,
 		"gemini-3.1-pro-preview": {
 			id: "gemini-3.1-pro-preview",
 			name: "Gemini 3.1 Pro Preview",
@@ -4282,25 +3997,6 @@ export const MODELS = {
 			contextWindow: 128000,
 			maxTokens: 4096,
 		} satisfies Model<"openai-completions">,
-		"gpt-5": {
-			id: "gpt-5",
-			name: "GPT-5",
-			api: "openai-responses",
-			provider: "github-copilot",
-			baseUrl: "https://api.individual.githubcopilot.com",
-			headers: {"User-Agent":"GitHubCopilotChat/0.35.0","Editor-Version":"vscode/1.107.0","Editor-Plugin-Version":"copilot-chat/0.35.0","Copilot-Integration-Id":"vscode-chat"},
-			reasoning: true,
-			thinkingLevelMap: {"off":null},
-			input: ["text", "image"],
-			cost: {
-				input: 0,
-				output: 0,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 128000,
-			maxTokens: 128000,
-		} satisfies Model<"openai-responses">,
 		"gpt-5-mini": {
 			id: "gpt-5-mini",
 			name: "GPT-5-mini",
@@ -4319,82 +4015,6 @@ export const MODELS = {
 			},
 			contextWindow: 264000,
 			maxTokens: 64000,
-		} satisfies Model<"openai-responses">,
-		"gpt-5.1": {
-			id: "gpt-5.1",
-			name: "GPT-5.1",
-			api: "openai-responses",
-			provider: "github-copilot",
-			baseUrl: "https://api.individual.githubcopilot.com",
-			headers: {"User-Agent":"GitHubCopilotChat/0.35.0","Editor-Version":"vscode/1.107.0","Editor-Plugin-Version":"copilot-chat/0.35.0","Copilot-Integration-Id":"vscode-chat"},
-			reasoning: true,
-			thinkingLevelMap: {"off":null},
-			input: ["text", "image"],
-			cost: {
-				input: 0,
-				output: 0,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 264000,
-			maxTokens: 64000,
-		} satisfies Model<"openai-responses">,
-		"gpt-5.1-codex": {
-			id: "gpt-5.1-codex",
-			name: "GPT-5.1-Codex",
-			api: "openai-responses",
-			provider: "github-copilot",
-			baseUrl: "https://api.individual.githubcopilot.com",
-			headers: {"User-Agent":"GitHubCopilotChat/0.35.0","Editor-Version":"vscode/1.107.0","Editor-Plugin-Version":"copilot-chat/0.35.0","Copilot-Integration-Id":"vscode-chat"},
-			reasoning: true,
-			thinkingLevelMap: {"off":null},
-			input: ["text", "image"],
-			cost: {
-				input: 0,
-				output: 0,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 400000,
-			maxTokens: 128000,
-		} satisfies Model<"openai-responses">,
-		"gpt-5.1-codex-max": {
-			id: "gpt-5.1-codex-max",
-			name: "GPT-5.1-Codex-max",
-			api: "openai-responses",
-			provider: "github-copilot",
-			baseUrl: "https://api.individual.githubcopilot.com",
-			headers: {"User-Agent":"GitHubCopilotChat/0.35.0","Editor-Version":"vscode/1.107.0","Editor-Plugin-Version":"copilot-chat/0.35.0","Copilot-Integration-Id":"vscode-chat"},
-			reasoning: true,
-			thinkingLevelMap: {"off":null},
-			input: ["text", "image"],
-			cost: {
-				input: 0,
-				output: 0,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 400000,
-			maxTokens: 128000,
-		} satisfies Model<"openai-responses">,
-		"gpt-5.1-codex-mini": {
-			id: "gpt-5.1-codex-mini",
-			name: "GPT-5.1-Codex-mini",
-			api: "openai-responses",
-			provider: "github-copilot",
-			baseUrl: "https://api.individual.githubcopilot.com",
-			headers: {"User-Agent":"GitHubCopilotChat/0.35.0","Editor-Version":"vscode/1.107.0","Editor-Plugin-Version":"copilot-chat/0.35.0","Copilot-Integration-Id":"vscode-chat"},
-			reasoning: true,
-			thinkingLevelMap: {"off":null},
-			input: ["text", "image"],
-			cost: {
-				input: 0,
-				output: 0,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 400000,
-			maxTokens: 128000,
 		} satisfies Model<"openai-responses">,
 		"gpt-5.2": {
 			id: "gpt-5.2",
@@ -4538,7 +4158,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "video", "audio"],
 			cost: {
 				input: 0.075,
 				output: 0.3,
@@ -4555,7 +4175,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "video", "audio"],
 			cost: {
 				input: 0.0375,
 				output: 0.15,
@@ -4572,7 +4192,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "video", "audio"],
 			cost: {
 				input: 1.25,
 				output: 5,
@@ -4589,7 +4209,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.1,
 				output: 0.4,
@@ -4606,7 +4226,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.075,
 				output: 0.3,
@@ -4623,7 +4243,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.3,
 				output: 2.5,
@@ -4640,11 +4260,11 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.1,
 				output: 0.4,
-				cacheRead: 0.025,
+				cacheRead: 0.01,
 				cacheWrite: 0,
 			},
 			contextWindow: 1048576,
@@ -4657,7 +4277,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.1,
 				output: 0.4,
@@ -4674,7 +4294,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.1,
 				output: 0.4,
@@ -4691,7 +4311,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.15,
 				output: 0.6,
@@ -4708,7 +4328,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.15,
 				output: 0.6,
@@ -4725,7 +4345,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.3,
 				output: 2.5,
@@ -4742,7 +4362,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -4759,7 +4379,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -4776,7 +4396,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -4794,7 +4414,7 @@ export const MODELS = {
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
 			thinkingLevelMap: {"off":null},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.5,
 				output: 3,
@@ -4812,7 +4432,7 @@ export const MODELS = {
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
 			thinkingLevelMap: {"off":null,"minimal":null,"low":"LOW","medium":null,"high":"HIGH"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 2,
 				output: 12,
@@ -4830,12 +4450,12 @@ export const MODELS = {
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
 			thinkingLevelMap: {"off":null},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.25,
 				output: 1.5,
 				cacheRead: 0.025,
-				cacheWrite: 1,
+				cacheWrite: 0,
 			},
 			contextWindow: 1048576,
 			maxTokens: 65536,
@@ -4848,12 +4468,12 @@ export const MODELS = {
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
 			thinkingLevelMap: {"off":null},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.25,
 				output: 1.5,
 				cacheRead: 0.025,
-				cacheWrite: 1,
+				cacheWrite: 0,
 			},
 			contextWindow: 1048576,
 			maxTokens: 65536,
@@ -4866,7 +4486,7 @@ export const MODELS = {
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
 			thinkingLevelMap: {"off":null,"minimal":null,"low":"LOW","medium":null,"high":"HIGH"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 2,
 				output: 12,
@@ -4884,7 +4504,7 @@ export const MODELS = {
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
 			thinkingLevelMap: {"off":null,"minimal":null,"low":"LOW","medium":null,"high":"HIGH"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 2,
 				output: 12,
@@ -4901,7 +4521,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.3,
 				output: 2.5,
@@ -4918,7 +4538,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.1,
 				output: 0.4,
@@ -4935,7 +4555,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video", "audio"],
 			cost: {
 				input: 0.5,
 				output: 2,
@@ -4952,7 +4572,7 @@ export const MODELS = {
 			provider: "google",
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			reasoning: true,
-			input: ["text"],
+			input: ["text", "video", "audio"],
 			cost: {
 				input: 0.5,
 				output: 2,
@@ -6836,7 +6456,7 @@ export const MODELS = {
 			provider: "openai",
 			baseUrl: "https://api.openai.com/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2,
 				output: 8,
@@ -6853,7 +6473,7 @@ export const MODELS = {
 			provider: "openai",
 			baseUrl: "https://api.openai.com/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.4,
 				output: 1.6,
@@ -6887,7 +6507,7 @@ export const MODELS = {
 			provider: "openai",
 			baseUrl: "https://api.openai.com/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2.5,
 				output: 10,
@@ -6955,7 +6575,7 @@ export const MODELS = {
 			provider: "openai",
 			baseUrl: "https://api.openai.com/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.15,
 				output: 0.6,
@@ -7207,7 +6827,7 @@ export const MODELS = {
 			baseUrl: "https://api.openai.com/v1",
 			reasoning: true,
 			thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -7261,7 +6881,7 @@ export const MODELS = {
 			baseUrl: "https://api.openai.com/v1",
 			reasoning: true,
 			thinkingLevelMap: {"off":"none","xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -7279,7 +6899,7 @@ export const MODELS = {
 			baseUrl: "https://api.openai.com/v1",
 			reasoning: true,
 			thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -7297,7 +6917,7 @@ export const MODELS = {
 			baseUrl: "https://api.openai.com/v1",
 			reasoning: true,
 			thinkingLevelMap: {"off":"none","xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2.5,
 				output: 15,
@@ -7369,7 +6989,7 @@ export const MODELS = {
 			baseUrl: "https://api.openai.com/v1",
 			reasoning: true,
 			thinkingLevelMap: {"off":"none","xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 30,
@@ -7387,7 +7007,7 @@ export const MODELS = {
 			baseUrl: "https://api.openai.com/v1",
 			reasoning: true,
 			thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 30,
 				output: 180,
@@ -7404,7 +7024,7 @@ export const MODELS = {
 			provider: "openai",
 			baseUrl: "https://api.openai.com/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 60,
@@ -7438,7 +7058,7 @@ export const MODELS = {
 			provider: "openai",
 			baseUrl: "https://api.openai.com/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2,
 				output: 8,
@@ -7703,7 +7323,7 @@ export const MODELS = {
 			baseUrl: "https://chatgpt.com/backend-api",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh","minimal":"low"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 30,
@@ -7870,6 +7490,25 @@ export const MODELS = {
 			contextWindow: 1000000,
 			maxTokens: 64000,
 		} satisfies Model<"anthropic-messages">,
+		"deepseek-v4-flash-free": {
+			id: "deepseek-v4-flash-free",
+			name: "DeepSeek V4 Flash Free",
+			api: "openai-completions",
+			provider: "opencode",
+			baseUrl: "https://opencode.ai/zen/v1",
+			compat: {"requiresReasoningContentOnAssistantMessages":true,"thinkingFormat":"deepseek"},
+			reasoning: true,
+			thinkingLevelMap: {"minimal":null,"low":null,"medium":null,"high":"high","xhigh":"max"},
+			input: ["text"],
+			cost: {
+				input: 0,
+				output: 0,
+				cacheRead: 0,
+				cacheWrite: 0,
+			},
+			contextWindow: 1000000,
+			maxTokens: 384000,
+		} satisfies Model<"openai-completions">,
 		"gemini-3-flash": {
 			id: "gemini-3-flash",
 			name: "Gemini 3 Flash",
@@ -8228,23 +7867,6 @@ export const MODELS = {
 			contextWindow: 1050000,
 			maxTokens: 128000,
 		} satisfies Model<"openai-responses">,
-		"hy3-preview-free": {
-			id: "hy3-preview-free",
-			name: "Hy3 preview Free",
-			api: "openai-completions",
-			provider: "opencode",
-			baseUrl: "https://opencode.ai/zen/v1",
-			reasoning: true,
-			input: ["text"],
-			cost: {
-				input: 0,
-				output: 0,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 256000,
-			maxTokens: 64000,
-		} satisfies Model<"openai-completions">,
 		"kimi-k2.5": {
 			id: "kimi-k2.5",
 			name: "Kimi K2.5",
@@ -8377,6 +7999,23 @@ export const MODELS = {
 				output: 3,
 				cacheRead: 0.05,
 				cacheWrite: 0.625,
+			},
+			contextWindow: 262144,
+			maxTokens: 65536,
+		} satisfies Model<"anthropic-messages">,
+		"qwen3.6-plus-free": {
+			id: "qwen3.6-plus-free",
+			name: "Qwen3.6 Plus Free",
+			api: "anthropic-messages",
+			provider: "opencode",
+			baseUrl: "https://opencode.ai/zen",
+			reasoning: true,
+			input: ["text", "image"],
+			cost: {
+				input: 0,
+				output: 0,
+				cacheRead: 0,
+				cacheWrite: 0,
 			},
 			contextWindow: 262144,
 			maxTokens: 65536,
@@ -8526,9 +8165,9 @@ export const MODELS = {
 		"minimax-m2.5": {
 			id: "minimax-m2.5",
 			name: "MiniMax M2.5",
-			api: "openai-completions",
+			api: "anthropic-messages",
 			provider: "opencode-go",
-			baseUrl: "https://opencode.ai/zen/go/v1",
+			baseUrl: "https://opencode.ai/zen/go",
 			reasoning: true,
 			input: ["text"],
 			cost: {
@@ -8539,7 +8178,7 @@ export const MODELS = {
 			},
 			contextWindow: 204800,
 			maxTokens: 65536,
-		} satisfies Model<"openai-completions">,
+		} satisfies Model<"anthropic-messages">,
 		"minimax-m2.7": {
 			id: "minimax-m2.7",
 			name: "MiniMax M2.7",
@@ -8636,7 +8275,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video"],
 			cost: {
 				input: 0.3,
 				output: 2.5,
@@ -8748,40 +8387,6 @@ export const MODELS = {
 			contextWindow: 200000,
 			maxTokens: 8192,
 		} satisfies Model<"openai-completions">,
-		"anthropic/claude-3.7-sonnet": {
-			id: "anthropic/claude-3.7-sonnet",
-			name: "Anthropic: Claude 3.7 Sonnet",
-			api: "openai-completions",
-			provider: "openrouter",
-			baseUrl: "https://openrouter.ai/api/v1",
-			reasoning: true,
-			input: ["text", "image"],
-			cost: {
-				input: 3,
-				output: 15,
-				cacheRead: 0.3,
-				cacheWrite: 3.75,
-			},
-			contextWindow: 200000,
-			maxTokens: 64000,
-		} satisfies Model<"openai-completions">,
-		"anthropic/claude-3.7-sonnet:thinking": {
-			id: "anthropic/claude-3.7-sonnet:thinking",
-			name: "Anthropic: Claude 3.7 Sonnet (thinking)",
-			api: "openai-completions",
-			provider: "openrouter",
-			baseUrl: "https://openrouter.ai/api/v1",
-			reasoning: true,
-			input: ["text", "image"],
-			cost: {
-				input: 3,
-				output: 15,
-				cacheRead: 0.3,
-				cacheWrite: 3.75,
-			},
-			contextWindow: 200000,
-			maxTokens: 64000,
-		} satisfies Model<"openai-completions">,
 		"anthropic/claude-haiku-4.5": {
 			id: "anthropic/claude-haiku-4.5",
 			name: "Anthropic: Claude Haiku 4.5",
@@ -8789,7 +8394,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1,
 				output: 5,
@@ -8806,7 +8411,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 75,
@@ -8823,7 +8428,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 75,
@@ -8840,7 +8445,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 25,
@@ -8858,7 +8463,7 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"max"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 25,
@@ -8876,7 +8481,7 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"max"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 30,
 				output: 150,
@@ -8894,12 +8499,30 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 25,
 				cacheRead: 0.5,
 				cacheWrite: 6.25,
+			},
+			contextWindow: 1000000,
+			maxTokens: 128000,
+		} satisfies Model<"openai-completions">,
+		"anthropic/claude-opus-4.7-fast": {
+			id: "anthropic/claude-opus-4.7-fast",
+			name: "Anthropic: Claude Opus 4.7 (Fast)",
+			api: "openai-completions",
+			provider: "openrouter",
+			baseUrl: "https://openrouter.ai/api/v1",
+			reasoning: true,
+			thinkingLevelMap: {"xhigh":"xhigh"},
+			input: ["text", "image", "pdf"],
+			cost: {
+				input: 30,
+				output: 150,
+				cacheRead: 3,
+				cacheWrite: 37.5,
 			},
 			contextWindow: 1000000,
 			maxTokens: 128000,
@@ -8911,7 +8534,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -8928,7 +8551,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -8945,7 +8568,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -8988,6 +8611,23 @@ export const MODELS = {
 			},
 			contextWindow: 262144,
 			maxTokens: 262144,
+		} satisfies Model<"openai-completions">,
+		"arcee-ai/trinity-large-thinking:free": {
+			id: "arcee-ai/trinity-large-thinking:free",
+			name: "Arcee AI: Trinity Large Thinking (free)",
+			api: "openai-completions",
+			provider: "openrouter",
+			baseUrl: "https://openrouter.ai/api/v1",
+			reasoning: true,
+			input: ["text"],
+			cost: {
+				input: 0,
+				output: 0,
+				cacheRead: 0,
+				cacheWrite: 0,
+			},
+			contextWindow: 262144,
+			maxTokens: 80000,
 		} satisfies Model<"openai-completions">,
 		"arcee-ai/trinity-mini": {
 			id: "arcee-ai/trinity-mini",
@@ -9098,7 +8738,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.25,
 				output: 2,
@@ -9115,7 +8755,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.075,
 				output: 0.3,
@@ -9132,7 +8772,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.25,
 				output: 2,
@@ -9149,7 +8789,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.09999999999999999,
 				output: 0.39999999999999997,
@@ -9236,13 +8876,13 @@ export const MODELS = {
 			reasoning: true,
 			input: ["text"],
 			cost: {
-				input: 0.15,
-				output: 0.75,
-				cacheRead: 0,
+				input: 0.21,
+				output: 0.7899999999999999,
+				cacheRead: 0.13,
 				cacheWrite: 0,
 			},
-			contextWindow: 32768,
-			maxTokens: 7168,
+			contextWindow: 163840,
+			maxTokens: 32768,
 		} satisfies Model<"openai-completions">,
 		"deepseek/deepseek-r1": {
 			id: "deepseek/deepseek-r1",
@@ -9340,9 +8980,28 @@ export const MODELS = {
 			thinkingLevelMap: {"minimal":null,"low":null,"medium":null,"high":"high","xhigh":"max"},
 			input: ["text"],
 			cost: {
-				input: 0.14,
-				output: 0.28,
-				cacheRead: 0.0028,
+				input: 0.126,
+				output: 0.252,
+				cacheRead: 0.0252,
+				cacheWrite: 0,
+			},
+			contextWindow: 1048576,
+			maxTokens: 131072,
+		} satisfies Model<"openai-completions">,
+		"deepseek/deepseek-v4-flash:free": {
+			id: "deepseek/deepseek-v4-flash:free",
+			name: "DeepSeek: DeepSeek V4 Flash (free)",
+			api: "openai-completions",
+			provider: "openrouter",
+			baseUrl: "https://openrouter.ai/api/v1",
+			compat: {"requiresReasoningContentOnAssistantMessages":true,"thinkingFormat":"deepseek"},
+			reasoning: true,
+			thinkingLevelMap: {"minimal":null,"low":null,"medium":null,"high":"high","xhigh":"max"},
+			input: ["text"],
+			cost: {
+				input: 0,
+				output: 0,
+				cacheRead: 0,
 				cacheWrite: 0,
 			},
 			contextWindow: 1048576,
@@ -9391,7 +9050,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.09999999999999999,
 				output: 0.39999999999999997,
@@ -9408,7 +9067,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.075,
 				output: 0.3,
@@ -9425,7 +9084,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.3,
 				output: 2.5,
@@ -9442,7 +9101,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.09999999999999999,
 				output: 0.39999999999999997,
@@ -9459,7 +9118,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.09999999999999999,
 				output: 0.39999999999999997,
@@ -9476,7 +9135,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -9493,7 +9152,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "audio"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -9510,7 +9169,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -9527,7 +9186,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.5,
 				output: 3,
@@ -9544,7 +9203,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.25,
 				output: 1.5,
@@ -9561,7 +9220,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.25,
 				output: 1.5,
@@ -9578,7 +9237,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 2,
 				output: 12,
@@ -9595,7 +9254,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 2,
 				output: 12,
@@ -9646,7 +9305,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.06,
 				output: 0.33,
@@ -9663,7 +9322,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0,
 				output: 0,
@@ -9680,10 +9339,10 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
-				input: 0.13,
-				output: 0.38,
+				input: 0.12,
+				output: 0.37,
 				cacheRead: 0,
 				cacheWrite: 0,
 			},
@@ -9697,7 +9356,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0,
 				output: 0,
@@ -9768,13 +9427,30 @@ export const MODELS = {
 			reasoning: false,
 			input: ["text"],
 			cost: {
-				input: 0.08,
-				output: 0.24,
-				cacheRead: 0.016,
+				input: 0.01,
+				output: 0.03,
+				cacheRead: 0.002,
 				cacheWrite: 0,
 			},
 			contextWindow: 262144,
 			maxTokens: 32768,
+		} satisfies Model<"openai-completions">,
+		"inclusionai/ring-2.6-1t:free": {
+			id: "inclusionai/ring-2.6-1t:free",
+			name: "inclusionAI: Ring-2.6-1T (free)",
+			api: "openai-completions",
+			provider: "openrouter",
+			baseUrl: "https://openrouter.ai/api/v1",
+			reasoning: true,
+			input: ["text"],
+			cost: {
+				input: 0,
+				output: 0,
+				cacheRead: 0,
+				cacheWrite: 0,
+			},
+			contextWindow: 262144,
+			maxTokens: 65536,
 		} satisfies Model<"openai-completions">,
 		"kwaipilot/kat-coder-pro-v2": {
 			id: "kwaipilot/kat-coder-pro-v2",
@@ -9940,11 +9616,11 @@ export const MODELS = {
 			cost: {
 				input: 0.15,
 				output: 1.15,
-				cacheRead: 0.03,
+				cacheRead: 0,
 				cacheWrite: 0,
 			},
 			contextWindow: 196608,
-			maxTokens: 131072,
+			maxTokens: 196608,
 		} satisfies Model<"openai-completions">,
 		"minimax/minimax-m2.5:free": {
 			id: "minimax/minimax-m2.5:free",
@@ -9972,13 +9648,13 @@ export const MODELS = {
 			reasoning: true,
 			input: ["text"],
 			cost: {
-				input: 0.3,
+				input: 0.27899999999999997,
 				output: 1.2,
-				cacheRead: 0.059,
+				cacheRead: 0,
 				cacheWrite: 0,
 			},
 			contextWindow: 196608,
-			maxTokens: 4096,
+			maxTokens: 131072,
 		} satisfies Model<"openai-completions">,
 		"mistralai/codestral-2508": {
 			id: "mistralai/codestral-2508",
@@ -9987,7 +9663,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text"],
+			input: ["text", "pdf"],
 			cost: {
 				input: 0.3,
 				output: 0.8999999999999999,
@@ -10004,7 +9680,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text"],
+			input: ["text", "pdf"],
 			cost: {
 				input: 0.39999999999999997,
 				output: 2,
@@ -10021,7 +9697,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text"],
+			input: ["text", "pdf"],
 			cost: {
 				input: 0.39999999999999997,
 				output: 2,
@@ -10038,7 +9714,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text"],
+			input: ["text", "pdf"],
 			cost: {
 				input: 0.09999999999999999,
 				output: 0.3,
@@ -10106,7 +9782,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text"],
+			input: ["text", "pdf"],
 			cost: {
 				input: 2,
 				output: 6,
@@ -10123,7 +9799,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text"],
+			input: ["text", "pdf"],
 			cost: {
 				input: 2,
 				output: 6,
@@ -10140,7 +9816,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text"],
+			input: ["text", "pdf"],
 			cost: {
 				input: 2,
 				output: 6,
@@ -10157,7 +9833,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.5,
 				output: 1.5,
@@ -10174,7 +9850,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.39999999999999997,
 				output: 2,
@@ -10191,7 +9867,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.5,
 				output: 7.5,
@@ -10208,7 +9884,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.39999999999999997,
 				output: 2,
@@ -10242,7 +9918,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text"],
+			input: ["text", "pdf"],
 			cost: {
 				input: 0.19999999999999998,
 				output: 0.6,
@@ -10293,7 +9969,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text"],
+			input: ["text", "pdf"],
 			cost: {
 				input: 2,
 				output: 6,
@@ -10310,7 +9986,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2,
 				output: 6,
@@ -10327,7 +10003,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text"],
+			input: ["text", "pdf", "audio"],
 			cost: {
 				input: 0.09999999999999999,
 				output: 0.3,
@@ -10363,8 +10039,8 @@ export const MODELS = {
 			reasoning: false,
 			input: ["text"],
 			cost: {
-				input: 0.39999999999999997,
-				output: 2,
+				input: 0.6,
+				output: 2.5,
 				cacheRead: 0,
 				cacheWrite: 0,
 			},
@@ -10414,13 +10090,13 @@ export const MODELS = {
 			reasoning: true,
 			input: ["text", "image"],
 			cost: {
-				input: 0.75,
-				output: 3.5,
-				cacheRead: 0.15,
+				input: 0.73,
+				output: 3.49,
+				cacheRead: 0.25,
 				cacheWrite: 0,
 			},
-			contextWindow: 262144,
-			maxTokens: 16384,
+			contextWindow: 262142,
+			maxTokens: 262142,
 		} satisfies Model<"openai-completions">,
 		"nex-agi/deepseek-v3.1-nex-n1": {
 			id: "nex-agi/deepseek-v3.1-nex-n1",
@@ -10497,7 +10173,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video", "audio"],
 			cost: {
 				input: 0,
 				output: 0,
@@ -10548,7 +10224,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0,
 				output: 0,
@@ -10735,7 +10411,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2,
 				output: 8,
@@ -10752,7 +10428,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.39999999999999997,
 				output: 1.5999999999999999,
@@ -10769,7 +10445,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.09999999999999999,
 				output: 0.39999999999999997,
@@ -10786,7 +10462,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2.5,
 				output: 10,
@@ -10803,7 +10479,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 15,
@@ -10820,7 +10496,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2.5,
 				output: 10,
@@ -10837,7 +10513,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2.5,
 				output: 10,
@@ -10854,7 +10530,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text"],
+			input: ["text", "audio"],
 			cost: {
 				input: 2.5,
 				output: 10,
@@ -10871,7 +10547,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.15,
 				output: 0.6,
@@ -10888,7 +10564,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.15,
 				output: 0.6,
@@ -10905,7 +10581,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -10939,7 +10615,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.25,
 				output: 2,
@@ -10956,7 +10632,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.049999999999999996,
 				output: 0.39999999999999997,
@@ -10973,7 +10649,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 120,
@@ -10990,7 +10666,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -11007,7 +10683,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -11076,7 +10752,7 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -11094,7 +10770,7 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -11130,7 +10806,7 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 21,
 				output: 168,
@@ -11148,7 +10824,7 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -11166,7 +10842,7 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -11184,7 +10860,7 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2.5,
 				output: 15,
@@ -11202,7 +10878,7 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.75,
 				output: 4.5,
@@ -11220,7 +10896,7 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.19999999999999998,
 				output: 1.25,
@@ -11238,7 +10914,7 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 30,
 				output: 180,
@@ -11256,7 +10932,7 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 30,
@@ -11274,7 +10950,7 @@ export const MODELS = {
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 30,
 				output: 180,
@@ -11291,7 +10967,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text"],
+			input: ["text", "audio"],
 			cost: {
 				input: 2.5,
 				output: 10,
@@ -11308,7 +10984,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text"],
+			input: ["text", "audio"],
 			cost: {
 				input: 0.6,
 				output: 2.4,
@@ -11325,7 +11001,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 30,
@@ -11427,7 +11103,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 60,
@@ -11444,7 +11120,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2,
 				output: 8,
@@ -11461,7 +11137,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 10,
 				output: 40,
@@ -11478,7 +11154,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text"],
+			input: ["text", "pdf"],
 			cost: {
 				input: 1.1,
 				output: 4.4,
@@ -11495,7 +11171,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text"],
+			input: ["text", "pdf"],
 			cost: {
 				input: 1.1,
 				output: 4.4,
@@ -11512,7 +11188,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 20,
 				output: 80,
@@ -11529,7 +11205,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.1,
 				output: 4.4,
@@ -11546,7 +11222,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2,
 				output: 8,
@@ -11563,7 +11239,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.1,
 				output: 4.4,
@@ -11580,7 +11256,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: -1000000,
 				output: -1000000,
@@ -11709,23 +11385,6 @@ export const MODELS = {
 			contextWindow: 32768,
 			maxTokens: 32768,
 		} satisfies Model<"openai-completions">,
-		"qwen/qwen-max": {
-			id: "qwen/qwen-max",
-			name: "Qwen: Qwen-Max ",
-			api: "openai-completions",
-			provider: "openrouter",
-			baseUrl: "https://openrouter.ai/api/v1",
-			reasoning: false,
-			input: ["text"],
-			cost: {
-				input: 1.04,
-				output: 4.16,
-				cacheRead: 0.20800000000000002,
-				cacheWrite: 0,
-			},
-			contextWindow: 32768,
-			maxTokens: 8192,
-		} satisfies Model<"openai-completions">,
 		"qwen/qwen-plus": {
 			id: "qwen/qwen-plus",
 			name: "Qwen: Qwen-Plus",
@@ -11777,40 +11436,6 @@ export const MODELS = {
 			contextWindow: 1000000,
 			maxTokens: 32768,
 		} satisfies Model<"openai-completions">,
-		"qwen/qwen-turbo": {
-			id: "qwen/qwen-turbo",
-			name: "Qwen: Qwen-Turbo",
-			api: "openai-completions",
-			provider: "openrouter",
-			baseUrl: "https://openrouter.ai/api/v1",
-			reasoning: false,
-			input: ["text"],
-			cost: {
-				input: 0.0325,
-				output: 0.13,
-				cacheRead: 0.006500000000000001,
-				cacheWrite: 0,
-			},
-			contextWindow: 131072,
-			maxTokens: 8192,
-		} satisfies Model<"openai-completions">,
-		"qwen/qwen-vl-max": {
-			id: "qwen/qwen-vl-max",
-			name: "Qwen: Qwen VL Max",
-			api: "openai-completions",
-			provider: "openrouter",
-			baseUrl: "https://openrouter.ai/api/v1",
-			reasoning: false,
-			input: ["text", "image"],
-			cost: {
-				input: 0.52,
-				output: 2.08,
-				cacheRead: 0,
-				cacheWrite: 0,
-			},
-			contextWindow: 131072,
-			maxTokens: 32768,
-		} satisfies Model<"openai-completions">,
 		"qwen/qwen3-14b": {
 			id: "qwen/qwen3-14b",
 			name: "Qwen: Qwen3 14B",
@@ -11820,7 +11445,7 @@ export const MODELS = {
 			reasoning: true,
 			input: ["text"],
 			cost: {
-				input: 0.06,
+				input: 0.09999999999999999,
 				output: 0.24,
 				cacheRead: 0,
 				cacheWrite: 0,
@@ -11940,12 +11565,12 @@ export const MODELS = {
 			input: ["text"],
 			cost: {
 				input: 0.08,
-				output: 0.24,
-				cacheRead: 0.04,
+				output: 0.28,
+				cacheRead: 0,
 				cacheWrite: 0,
 			},
 			contextWindow: 40960,
-			maxTokens: 40960,
+			maxTokens: 16384,
 		} satisfies Model<"openai-completions">,
 		"qwen/qwen3-8b": {
 			id: "qwen/qwen3-8b",
@@ -12277,7 +11902,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.26,
 				output: 2.08,
@@ -12294,7 +11919,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.195,
 				output: 1.56,
@@ -12311,7 +11936,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.14,
 				output: 1,
@@ -12328,7 +11953,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.39,
 				output: 2.34,
@@ -12345,7 +11970,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.04,
 				output: 0.15,
@@ -12362,7 +11987,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.065,
 				output: 0.26,
@@ -12379,7 +12004,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.26,
 				output: 1.56,
@@ -12396,10 +12021,10 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
-				input: 0.39999999999999997,
-				output: 2.4,
+				input: 0.3,
+				output: 1.7999999999999998,
 				cacheRead: 0,
 				cacheWrite: 0,
 			},
@@ -12413,7 +12038,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.32,
 				output: 3.1999999999999997,
@@ -12430,7 +12055,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.15,
 				output: 1,
@@ -12447,12 +12072,12 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
-				input: 0.25,
-				output: 1.5,
+				input: 0.1875,
+				output: 1.125,
 				cacheRead: 0,
-				cacheWrite: 0.3125,
+				cacheWrite: 0.234375,
 			},
 			contextWindow: 1000000,
 			maxTokens: 65536,
@@ -12481,7 +12106,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.325,
 				output: 1.95,
@@ -12498,7 +12123,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.09999999999999999,
 				output: 0.09999999999999999,
@@ -12576,18 +12201,18 @@ export const MODELS = {
 			contextWindow: 262144,
 			maxTokens: 65536,
 		} satisfies Model<"openai-completions">,
-		"tencent/hy3-preview:free": {
-			id: "tencent/hy3-preview:free",
-			name: "Tencent: Hy3 preview (free)",
+		"tencent/hy3-preview": {
+			id: "tencent/hy3-preview",
+			name: "Tencent: Hy3 preview",
 			api: "openai-completions",
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
 			input: ["text"],
 			cost: {
-				input: 0,
-				output: 0,
-				cacheRead: 0,
+				input: 0.06599999999999999,
+				output: 0.26,
+				cacheRead: 0.029,
 				cacheWrite: 0,
 			},
 			contextWindow: 262144,
@@ -12626,23 +12251,6 @@ export const MODELS = {
 			},
 			contextWindow: 32768,
 			maxTokens: 32768,
-		} satisfies Model<"openai-completions">,
-		"tngtech/deepseek-r1t2-chimera": {
-			id: "tngtech/deepseek-r1t2-chimera",
-			name: "TNG: DeepSeek R1T2 Chimera",
-			api: "openai-completions",
-			provider: "openrouter",
-			baseUrl: "https://openrouter.ai/api/v1",
-			reasoning: true,
-			input: ["text"],
-			cost: {
-				input: 0.3,
-				output: 1.1,
-				cacheRead: 0.15,
-				cacheWrite: 0,
-			},
-			contextWindow: 163840,
-			maxTokens: 163840,
 		} satisfies Model<"openai-completions">,
 		"upstage/solar-pro-3": {
 			id: "upstage/solar-pro-3",
@@ -12736,7 +12344,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -12753,7 +12361,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.19999999999999998,
 				output: 0.5,
@@ -12770,7 +12378,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.19999999999999998,
 				output: 0.5,
@@ -12787,7 +12395,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 2.5,
@@ -12840,9 +12448,9 @@ export const MODELS = {
 			reasoning: true,
 			input: ["text"],
 			cost: {
-				input: 0.09,
-				output: 0.29,
-				cacheRead: 0.045,
+				input: 0.09999999999999999,
+				output: 0.3,
+				cacheRead: 0.01,
 				cacheWrite: 0,
 			},
 			contextWindow: 262144,
@@ -12855,7 +12463,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video", "audio"],
 			cost: {
 				input: 0.39999999999999997,
 				output: 2,
@@ -12889,7 +12497,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video", "audio"],
 			cost: {
 				input: 0.39999999999999997,
 				output: 2,
@@ -12914,7 +12522,7 @@ export const MODELS = {
 				cacheWrite: 0,
 			},
 			contextWindow: 1048576,
-			maxTokens: 131072,
+			maxTokens: 16384,
 		} satisfies Model<"openai-completions">,
 		"z-ai/glm-4-32b": {
 			id: "z-ai/glm-4-32b",
@@ -13010,13 +12618,13 @@ export const MODELS = {
 			reasoning: true,
 			input: ["text"],
 			cost: {
-				input: 0.39,
-				output: 1.9,
-				cacheRead: 0,
+				input: 0.43,
+				output: 1.74,
+				cacheRead: 0.08,
 				cacheWrite: 0,
 			},
-			contextWindow: 204800,
-			maxTokens: 204800,
+			contextWindow: 202752,
+			maxTokens: 131072,
 		} satisfies Model<"openai-completions">,
 		"z-ai/glm-4.6v": {
 			id: "z-ai/glm-4.6v",
@@ -13025,7 +12633,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 0.3,
 				output: 0.8999999999999999,
@@ -13112,13 +12720,13 @@ export const MODELS = {
 			reasoning: true,
 			input: ["text"],
 			cost: {
-				input: 1.0499999999999998,
-				output: 3.5,
-				cacheRead: 0.5249999999999999,
+				input: 0.98,
+				output: 3.08,
+				cacheRead: 0.182,
 				cacheWrite: 0,
 			},
 			contextWindow: 202752,
-			maxTokens: 65535,
+			maxTokens: 4096,
 		} satisfies Model<"openai-completions">,
 		"z-ai/glm-5v-turbo": {
 			id: "z-ai/glm-5v-turbo",
@@ -13127,7 +12735,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "video"],
 			cost: {
 				input: 1.2,
 				output: 4,
@@ -13144,7 +12752,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1,
 				output: 5,
@@ -13161,7 +12769,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 25,
@@ -13178,7 +12786,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -13195,7 +12803,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0.5,
 				output: 3,
@@ -13212,7 +12820,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 2,
 				output: 12,
@@ -13231,13 +12839,13 @@ export const MODELS = {
 			reasoning: true,
 			input: ["text", "image"],
 			cost: {
-				input: 0.75,
-				output: 3.5,
-				cacheRead: 0.15,
+				input: 0.73,
+				output: 3.49,
+				cacheRead: 0.25,
 				cacheWrite: 0,
 			},
-			contextWindow: 262144,
-			maxTokens: 16384,
+			contextWindow: 262142,
+			maxTokens: 262142,
 		} satisfies Model<"openai-completions">,
 		"~openai/gpt-latest": {
 			id: "~openai/gpt-latest",
@@ -13246,7 +12854,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 30,
@@ -13263,7 +12871,7 @@ export const MODELS = {
 			provider: "openrouter",
 			baseUrl: "https://openrouter.ai/api/v1",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.75,
 				output: 4.5,
@@ -13672,7 +13280,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.3,
 				output: 7.8,
@@ -13689,7 +13297,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.39999999999999997,
 				output: 4,
@@ -13825,7 +13433,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.39999999999999997,
 				output: 4,
@@ -13842,7 +13450,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.09999999999999999,
 				output: 0.39999999999999997,
@@ -13859,7 +13467,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.39999999999999997,
 				output: 2.4,
@@ -13876,7 +13484,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.6,
 				output: 3.5999999999999996,
@@ -13893,7 +13501,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.5,
 				output: 3,
@@ -13927,29 +13535,12 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.7999999999999999,
 				output: 4,
 				cacheRead: 0.08,
 				cacheWrite: 1,
-			},
-			contextWindow: 200000,
-			maxTokens: 8192,
-		} satisfies Model<"anthropic-messages">,
-		"anthropic/claude-3.7-sonnet": {
-			id: "anthropic/claude-3.7-sonnet",
-			name: "Claude 3.7 Sonnet",
-			api: "anthropic-messages",
-			provider: "vercel-ai-gateway",
-			baseUrl: "https://ai-gateway.vercel.sh",
-			reasoning: true,
-			input: ["text", "image"],
-			cost: {
-				input: 3,
-				output: 15,
-				cacheRead: 0.3,
-				cacheWrite: 3.75,
 			},
 			contextWindow: 200000,
 			maxTokens: 8192,
@@ -13961,7 +13552,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1,
 				output: 5,
@@ -13978,7 +13569,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 75,
@@ -13995,7 +13586,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 75,
@@ -14012,7 +13603,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 25,
@@ -14030,7 +13621,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"max"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 25,
@@ -14048,7 +13639,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 25,
@@ -14065,7 +13656,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -14082,7 +13673,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -14099,7 +13690,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 3,
 				output: 15,
@@ -14320,7 +13911,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.15,
 				output: 0.6,
@@ -14337,7 +13928,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.075,
 				output: 0.3,
@@ -14354,7 +13945,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.3,
 				output: 2.5,
@@ -14371,7 +13962,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.09999999999999999,
 				output: 0.39999999999999997,
@@ -14388,7 +13979,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -14405,7 +13996,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.5,
 				output: 3,
@@ -14422,7 +14013,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2,
 				output: 12,
@@ -14439,7 +14030,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.25,
 				output: 1.5,
@@ -14456,7 +14047,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.25,
 				output: 1.5,
@@ -14473,7 +14064,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2,
 				output: 12,
@@ -14490,7 +14081,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.13,
 				output: 0.39999999999999997,
@@ -14507,7 +14098,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.14,
 				output: 0.39999999999999997,
@@ -14796,7 +14387,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.3,
 				output: 1.2,
@@ -15085,7 +14676,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.95,
 				output: 4,
@@ -15153,7 +14744,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2,
 				output: 8,
@@ -15170,7 +14761,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.39999999999999997,
 				output: 1.5999999999999999,
@@ -15187,7 +14778,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.09999999999999999,
 				output: 0.39999999999999997,
@@ -15204,7 +14795,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2.5,
 				output: 10,
@@ -15221,7 +14812,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.15,
 				output: 0.6,
@@ -15238,7 +14829,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -15255,7 +14846,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -15272,7 +14863,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text"],
+			input: ["text", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -15289,7 +14880,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.25,
 				output: 2,
@@ -15306,7 +14897,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.049999999999999996,
 				output: 0.39999999999999997,
@@ -15323,7 +14914,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 120,
@@ -15340,7 +14931,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -15357,7 +14948,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -15374,7 +14965,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.25,
 				output: 2,
@@ -15391,7 +14982,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -15408,7 +14999,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 10,
@@ -15426,7 +15017,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -15444,7 +15035,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -15462,7 +15053,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -15480,7 +15071,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 21,
 				output: 168,
@@ -15498,7 +15089,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -15516,7 +15107,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.75,
 				output: 14,
@@ -15534,7 +15125,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2.5,
 				output: 15,
@@ -15552,7 +15143,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.75,
 				output: 4.5,
@@ -15570,7 +15161,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.19999999999999998,
 				output: 1.25,
@@ -15588,7 +15179,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 30,
 				output: 180,
@@ -15606,7 +15197,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 5,
 				output: 30,
@@ -15624,7 +15215,7 @@ export const MODELS = {
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
 			thinkingLevelMap: {"xhigh":"xhigh"},
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 30,
 				output: 180,
@@ -15636,7 +15227,7 @@ export const MODELS = {
 		} satisfies Model<"anthropic-messages">,
 		"openai/gpt-oss-20b": {
 			id: "openai/gpt-oss-20b",
-			name: "GPT OSS 120B",
+			name: "GPT OSS 20B",
 			api: "anthropic-messages",
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
@@ -15675,7 +15266,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 15,
 				output: 60,
@@ -15692,7 +15283,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 2,
 				output: 8,
@@ -15709,7 +15300,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 10,
 				output: 40,
@@ -15743,7 +15334,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 20,
 				output: 80,
@@ -15760,7 +15351,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.1,
 				output: 4.4,
@@ -15896,7 +15487,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.19999999999999998,
 				output: 0.5,
@@ -15913,7 +15504,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.19999999999999998,
 				output: 0.5,
@@ -15930,7 +15521,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.19999999999999998,
 				output: 0.5,
@@ -15947,7 +15538,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.19999999999999998,
 				output: 0.5,
@@ -15964,7 +15555,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 2.5,
@@ -15981,7 +15572,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 2.5,
@@ -15998,7 +15589,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 2.5,
@@ -16015,7 +15606,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: false,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 2.5,
@@ -16032,7 +15623,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 2.5,
@@ -16049,7 +15640,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 2.5,
@@ -16066,7 +15657,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.25,
 				output: 2.5,
@@ -16134,7 +15725,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.39999999999999997,
 				output: 2,
@@ -16151,7 +15742,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1,
 				output: 3,
@@ -16236,7 +15827,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0.3,
 				output: 0.8999999999999999,
@@ -16253,7 +15844,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 0,
 				output: 0,
@@ -16372,7 +15963,7 @@ export const MODELS = {
 			provider: "vercel-ai-gateway",
 			baseUrl: "https://ai-gateway.vercel.sh",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: {
 				input: 1.2,
 				output: 4,

@@ -1,55 +1,65 @@
-import type {
-	Api,
-	AssistantMessage,
-	ImageContent,
-	Message,
-	Model,
-	TextContent,
-	ToolCall,
-	ToolResultMessage,
-} from "../types.js";
+import type { Api, AssistantMessage, Message, Model, ToolCall, ToolResultMessage, UserContent } from "../types.js";
 
-const NON_VISION_USER_IMAGE_PLACEHOLDER = "(image omitted: model does not support images)";
-const NON_VISION_TOOL_IMAGE_PLACEHOLDER = "(tool image omitted: model does not support images)";
+type PlaceholderContext = "user" | "toolResult";
 
-function replaceImagesWithPlaceholder(content: (TextContent | ImageContent)[], placeholder: string): TextContent[] {
-	const result: TextContent[] = [];
-	let previousWasPlaceholder = false;
+const MEDIA_PLACEHOLDERS: Record<Exclude<UserContent["type"], "text">, Record<PlaceholderContext, string>> = {
+	image: {
+		user: "(image omitted: model does not support images)",
+		toolResult: "(tool image omitted: model does not support images)",
+	},
+	pdf: {
+		user: "(PDF omitted: model does not support PDF)",
+		toolResult: "(tool PDF omitted: model does not support PDF)",
+	},
+	video: {
+		user: "(video omitted: model does not support video)",
+		toolResult: "(tool video omitted: model does not support video)",
+	},
+	audio: {
+		user: "(audio omitted: model does not support audio)",
+		toolResult: "(tool audio omitted: model does not support audio)",
+	},
+};
+
+function placeholderFor(type: Exclude<UserContent["type"], "text">, context: PlaceholderContext): string {
+	return MEDIA_PLACEHOLDERS[type][context];
+}
+
+function replaceUnsupportedMediaWithPlaceholders(
+	content: UserContent[],
+	model: Model<Api>,
+	context: PlaceholderContext,
+): UserContent[] {
+	const result: UserContent[] = [];
+	let lastGeneratedPlaceholder: string | undefined;
+	let changed = false;
 
 	for (const block of content) {
-		if (block.type === "image") {
-			if (!previousWasPlaceholder) {
-				result.push({ type: "text", text: placeholder });
-			}
-			previousWasPlaceholder = true;
+		if (block.type !== "text" && !model.input.includes(block.type)) {
+			const placeholder = placeholderFor(block.type, context);
+			if (lastGeneratedPlaceholder !== placeholder) result.push({ type: "text", text: placeholder });
+			lastGeneratedPlaceholder = placeholder;
+			changed = true;
 			continue;
 		}
 
 		result.push(block);
-		previousWasPlaceholder = block.text === placeholder;
+		lastGeneratedPlaceholder = undefined;
 	}
 
-	return result;
+	return changed ? result : content;
 }
 
-function downgradeUnsupportedImages<TApi extends Api>(messages: Message[], model: Model<TApi>): Message[] {
-	if (model.input.includes("image")) {
-		return messages;
-	}
-
+function downgradeUnsupportedMedia<TApi extends Api>(messages: Message[], model: Model<TApi>): Message[] {
 	return messages.map((msg) => {
 		if (msg.role === "user" && Array.isArray(msg.content)) {
-			return {
-				...msg,
-				content: replaceImagesWithPlaceholder(msg.content, NON_VISION_USER_IMAGE_PLACEHOLDER),
-			};
+			const content = replaceUnsupportedMediaWithPlaceholders(msg.content, model, "user");
+			return content === msg.content ? msg : { ...msg, content };
 		}
 
 		if (msg.role === "toolResult") {
-			return {
-				...msg,
-				content: replaceImagesWithPlaceholder(msg.content, NON_VISION_TOOL_IMAGE_PLACEHOLDER),
-			};
+			const content = replaceUnsupportedMediaWithPlaceholders(msg.content, model, "toolResult");
+			return content === msg.content ? msg : { ...msg, content };
 		}
 
 		return msg;
@@ -68,10 +78,10 @@ export function transformMessages<TApi extends Api>(
 ): Message[] {
 	// Build a map of original tool call IDs to normalized IDs
 	const toolCallIdMap = new Map<string, string>();
-	const imageAwareMessages = downgradeUnsupportedImages(messages, model);
+	const mediaAwareMessages = downgradeUnsupportedMedia(messages, model);
 
-	// First pass: transform messages (unsupported image downgrade, thinking blocks, tool call ID normalization)
-	const transformed = imageAwareMessages.map((msg) => {
+	// First pass: transform messages (unsupported media downgrade, thinking blocks, tool call ID normalization)
+	const transformed = mediaAwareMessages.map((msg) => {
 		// User messages pass through unchanged
 		if (msg.role === "user") {
 			return msg;

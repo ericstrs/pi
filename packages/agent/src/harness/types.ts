@@ -1,4 +1,4 @@
-import type { ImageContent, Model, SimpleStreamOptions, TextContent, Transport } from "@earendil-works/pi-ai";
+import type { ImageContent, Model, SimpleStreamOptions, TextContent, Transport, UserContent } from "@earendil-works/pi-ai";
 import type { AgentEvent, AgentMessage, AgentTool, QueueMode, ThinkingLevel } from "../index.js";
 import type { Session } from "./session/session.js";
 
@@ -303,7 +303,7 @@ export interface CustomEntry<T = unknown> extends SessionTreeEntryBase {
 export interface CustomMessageEntry<T = unknown> extends SessionTreeEntryBase {
 	type: "custom_message";
 	customType: string;
-	content: string | (TextContent | ImageContent)[];
+	content: string | UserContent[];
 	details?: T;
 	display: boolean;
 }
@@ -476,7 +476,7 @@ export interface ToolResultEvent {
 	toolCallId: string;
 	toolName: string;
 	input: Record<string, unknown>;
-	content: Array<TextContent | ImageContent>;
+	content: UserContent[];
 	details: unknown;
 	isError: boolean;
 }
@@ -581,7 +581,7 @@ export interface ToolCallResult {
 }
 
 export interface ToolResultPatch {
-	content?: Array<TextContent | ImageContent>;
+	content?: UserContent[];
 	details?: unknown;
 	isError?: boolean;
 	terminate?: boolean;

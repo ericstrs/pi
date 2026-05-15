@@ -17,7 +17,6 @@ import type {
 	Api,
 	AssistantMessage,
 	Context,
-	ImageContent,
 	Model,
 	StopReason,
 	TextContent,
@@ -26,6 +25,7 @@ import type {
 	Tool,
 	ToolCall,
 	Usage,
+	UserContent,
 } from "../types.js";
 import type { AssistantMessageEventStream } from "../utils/event-stream.js";
 import { shortHash } from "../utils/hash.js";
@@ -61,6 +61,45 @@ function parseTextSignature(
 		}
 	}
 	return { id: signature };
+}
+
+function responseInputContentForMedia(item: Exclude<UserContent, TextContent>): ResponseInputContent {
+	const dataUrl = `data:${item.mimeType};base64,${item.data}`;
+	if (item.type === "pdf") {
+		return {
+			type: "input_file",
+			filename: item.name ?? "document.pdf",
+			file_data: dataUrl,
+		} as unknown as ResponseInputContent;
+	}
+	if (item.type === "image") {
+		return {
+			type: "input_image",
+			detail: "auto",
+			image_url: dataUrl,
+		} satisfies ResponseInputImage;
+	}
+	return {
+		type: "input_text",
+		text: `(${item.type} omitted: OpenAI Responses serializer does not support native ${item.type})`,
+	} satisfies ResponseInputText;
+}
+
+function responseFunctionOutputContentForMedia(
+	item: Exclude<UserContent, TextContent>,
+): ResponseFunctionCallOutputItemList[number] | null {
+	const dataUrl = `data:${item.mimeType};base64,${item.data}`;
+	if (item.type === "pdf") {
+		return { type: "input_file", filename: item.name ?? "document.pdf", file_data: dataUrl };
+	}
+	if (item.type === "image") {
+		return {
+			type: "input_image",
+			detail: "auto",
+			image_url: dataUrl,
+		};
+	}
+	return null;
 }
 
 export interface OpenAIResponsesStreamOptions {
@@ -147,11 +186,7 @@ export function convertResponsesMessages<TApi extends Api>(
 							text: sanitizeSurrogates(item.text),
 						} satisfies ResponseInputText;
 					}
-					return {
-						type: "input_image",
-						detail: "auto",
-						image_url: `data:${item.mimeType};base64,${item.data}`,
-					} satisfies ResponseInputImage;
+					return responseInputContentForMedia(item);
 				});
 				if (content.length === 0) continue;
 				messages.push({
@@ -219,12 +254,24 @@ export function convertResponsesMessages<TApi extends Api>(
 				.filter((c): c is TextContent => c.type === "text")
 				.map((c) => c.text)
 				.join("\n");
-			const hasImages = msg.content.some((c): c is ImageContent => c.type === "image");
 			const hasText = textResult.length > 0;
 			const [callId] = msg.toolCallId.split("|");
+			const mediaBlocks = msg.content.filter(
+				(c): c is Exclude<UserContent, TextContent> => c.type !== "text" && model.input.includes(c.type),
+			);
+			const contentMediaParts = mediaBlocks
+				.map(responseFunctionOutputContentForMedia)
+				.filter((part): part is ResponseFunctionCallOutputItemList[number] => part !== null);
+			const unsupportedToolMediaText = mediaBlocks
+				.filter((block) => responseFunctionOutputContentForMedia(block) === null)
+				.map(
+					(block) =>
+						`(tool ${block.type} omitted: OpenAI Responses function_call_output does not support native ${block.type})`,
+				)
+				.join("\n");
 
 			let output: string | ResponseFunctionCallOutputItemList;
-			if (hasImages && model.input.includes("image")) {
+			if (contentMediaParts.length > 0) {
 				const contentParts: ResponseFunctionCallOutputItemList = [];
 
 				if (hasText) {
@@ -233,20 +280,18 @@ export function convertResponsesMessages<TApi extends Api>(
 						text: sanitizeSurrogates(textResult),
 					});
 				}
-
-				for (const block of msg.content) {
-					if (block.type === "image") {
-						contentParts.push({
-							type: "input_image",
-							detail: "auto",
-							image_url: `data:${block.mimeType};base64,${block.data}`,
-						});
-					}
+				if (unsupportedToolMediaText) {
+					contentParts.push({
+						type: "input_text",
+						text: sanitizeSurrogates(unsupportedToolMediaText),
+					});
 				}
+				contentParts.push(...contentMediaParts);
 
 				output = contentParts;
 			} else {
-				output = sanitizeSurrogates(hasText ? textResult : "(see attached image)");
+				const textOutput = [hasText ? textResult : "", unsupportedToolMediaText].filter(Boolean).join("\n");
+				output = sanitizeSurrogates(textOutput || "(see attached media)");
 			}
 
 			messages.push({

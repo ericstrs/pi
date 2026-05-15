@@ -141,15 +141,9 @@ function extractText(messages: AgentMessage[]): string {
 				case "user":
 					return typeof message.content === "string"
 						? message.content
-						: message.content
-								.filter((block): block is { type: "text"; text: string } => block.type === "text")
-								.map((block) => block.text)
-								.join(" ");
+						: message.content.flatMap((block) => (block.type === "text" ? [block.text] : [])).join(" ");
 				case "assistant":
-					return message.content
-						.filter((block): block is { type: "text"; text: string } => block.type === "text")
-						.map((block) => block.text)
-						.join(" ");
+					return message.content.flatMap((block) => (block.type === "text" ? [block.text] : [])).join(" ");
 				case "branchSummary":
 				case "compactionSummary":
 					return message.summary;
@@ -157,10 +151,7 @@ function extractText(messages: AgentMessage[]): string {
 				case "toolResult":
 					return typeof message.content === "string"
 						? message.content
-						: message.content
-								.filter((block): block is { type: "text"; text: string } => block.type === "text")
-								.map((block) => block.text)
-								.join(" ");
+						: message.content.flatMap((block) => (block.type === "text" ? [block.text] : [])).join(" ");
 				case "bashExecution":
 					return `${message.command}\n${message.output}`;
 				default:

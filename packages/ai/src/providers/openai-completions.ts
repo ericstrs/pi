@@ -16,7 +16,6 @@ import type {
 	AssistantMessage,
 	CacheRetention,
 	Context,
-	ImageContent,
 	Message,
 	Model,
 	OpenAICompletionsCompat,
@@ -29,6 +28,7 @@ import type {
 	Tool,
 	ToolCall,
 	ToolResultMessage,
+	UserContent,
 } from "../types.js";
 import { AssistantMessageEventStream } from "../utils/event-stream.js";
 import { headersToRecord } from "../utils/headers.js";
@@ -70,8 +70,24 @@ function isToolCallBlock(block: { type: string }): block is ToolCall {
 	return block.type === "toolCall";
 }
 
-function isImageContentBlock(block: { type: string }): block is ImageContent {
-	return block.type === "image";
+function contentPartForMedia(item: Exclude<UserContent, TextContent>): ChatCompletionContentPart {
+	const dataUrl = `data:${item.mimeType};base64,${item.data}`;
+	if (item.type === "pdf") {
+		return {
+			type: "file",
+			file: { filename: item.name ?? "document.pdf", file_data: dataUrl },
+		} as unknown as ChatCompletionContentPart;
+	}
+	if (item.type === "video") {
+		return { type: "video_url", video_url: { url: dataUrl } } as unknown as ChatCompletionContentPart;
+	}
+	if (item.type === "audio") {
+		return { type: "audio_url", audio_url: { url: dataUrl } } as unknown as ChatCompletionContentPart;
+	}
+	return {
+		type: "image_url",
+		image_url: { url: dataUrl },
+	} satisfies ChatCompletionContentPartImage;
 }
 
 export interface OpenAICompletionsOptions extends StreamOptions {
@@ -784,14 +800,8 @@ export function convertMessages(
 							type: "text",
 							text: sanitizeSurrogates(item.text),
 						} satisfies ChatCompletionContentPartText;
-					} else {
-						return {
-							type: "image_url",
-							image_url: {
-								url: `data:${item.mimeType};base64,${item.data}`,
-							},
-						} satisfies ChatCompletionContentPartImage;
 					}
+					return contentPartForMedia(item);
 				});
 				if (content.length === 0) continue;
 				params.push({
@@ -898,25 +908,30 @@ export function convertMessages(
 			}
 			params.push(assistantMsg);
 		} else if (msg.role === "toolResult") {
-			const imageBlocks: Array<{ type: "image_url"; image_url: { url: string } }> = [];
+			const mediaBlocks: ChatCompletionContentPart[] = [];
 			let j = i;
 
 			for (; j < transformedMessages.length && transformedMessages[j].role === "toolResult"; j++) {
 				const toolMsg = transformedMessages[j] as ToolResultMessage;
 
-				// Extract text and image content
+				// Extract text and media content
 				const textResult = toolMsg.content
 					.filter(isTextContentBlock)
 					.map((block) => block.text)
 					.join("\n");
-				const hasImages = toolMsg.content.some((c) => c.type === "image");
+				const supportedMedia = toolMsg.content.filter(
+					(block): block is Exclude<UserContent, TextContent> =>
+						block.type !== "text" && model.input.includes(block.type),
+				);
 
-				// Always send tool result with text (or placeholder if only images)
+				// Always send tool result with text (or placeholder if only media)
 				const hasText = textResult.length > 0;
 				// Some providers require the 'name' field in tool results
 				const toolResultMsg: ChatCompletionToolMessageParam = {
 					role: "tool",
-					content: sanitizeSurrogates(hasText ? textResult : "(see attached image)"),
+					content: sanitizeSurrogates(
+						hasText ? textResult : supportedMedia.length > 0 ? "(see attached media)" : "",
+					),
 					tool_call_id: toolMsg.toolCallId,
 				};
 				if (compat.requiresToolResultName && toolMsg.toolName) {
@@ -924,23 +939,14 @@ export function convertMessages(
 				}
 				params.push(toolResultMsg);
 
-				if (hasImages && model.input.includes("image")) {
-					for (const block of toolMsg.content) {
-						if (isImageContentBlock(block)) {
-							imageBlocks.push({
-								type: "image_url",
-								image_url: {
-									url: `data:${block.mimeType};base64,${block.data}`,
-								},
-							});
-						}
-					}
+				for (const block of supportedMedia) {
+					mediaBlocks.push(contentPartForMedia(block));
 				}
 			}
 
 			i = j - 1;
 
-			if (imageBlocks.length > 0) {
+			if (mediaBlocks.length > 0) {
 				if (compat.requiresAssistantAfterToolResult) {
 					params.push({
 						role: "assistant",
@@ -953,9 +959,11 @@ export function convertMessages(
 					content: [
 						{
 							type: "text",
-							text: "Attached image(s) from tool result:",
+							text: mediaBlocks.every((part) => part.type === "image_url")
+								? "Attached image(s) from tool result:"
+								: "Attached media from tool result:",
 						},
-						...imageBlocks,
+						...mediaBlocks,
 					],
 				});
 				lastRole = "user";

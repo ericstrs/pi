@@ -1,4 +1,5 @@
 import type { AgentTool } from "@earendil-works/pi-agent-core";
+import type { UserContent } from "@earendil-works/pi-ai";
 import { Text } from "@earendil-works/pi-tui";
 import { existsSync, readdirSync, statSync } from "fs";
 import nodePath from "path";
@@ -65,7 +66,7 @@ function formatLsCall(
 
 function formatLsResult(
 	result: {
-		content: Array<{ type: string; text?: string; data?: string; mimeType?: string }>;
+		content: UserContent[];
 		details?: LsToolDetails;
 	},
 	options: ToolRenderResultOptions,

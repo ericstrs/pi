@@ -99,4 +99,68 @@ describe("google-shared image tool result routing", () => {
 		expect(imageResponse?.parts).toHaveLength(1);
 		expect(imageResponse?.parts?.[0]?.inlineData).toBeTruthy();
 	});
+
+	it("normalizes MP3 audio MIME type for Gemini inline data", () => {
+		const model = makeModel("google-generative-ai", "google", "gemini-3-pro-preview");
+		model.input = ["text", "audio"];
+		const contents = convertMessages(model, {
+			messages: [
+				{
+					role: "user",
+					content: [
+						{ type: "text", text: "what do you hear?" },
+						{ type: "audio", data: "abc", mimeType: "audio/mpeg" },
+					],
+					timestamp: Date.now(),
+				},
+			],
+		});
+
+		expect(contents[0].parts?.[1]?.inlineData?.mimeType).toBe("audio/mp3");
+	});
+
+	it("routes audio tool results as follow-up user media for Gemini 3", () => {
+		const model = makeModel("google-generative-ai", "google", "gemini-3-pro-preview");
+		model.input = ["text", "audio"];
+		const now = Date.now();
+		const contents = convertMessages(model, {
+			messages: [
+				{ role: "user", content: "what do you hear?", timestamp: now },
+				{
+					role: "assistant",
+					content: [{ type: "toolCall", id: "call_audio", name: "read", arguments: { path: "test.mp3" } }],
+					api: model.api,
+					provider: model.provider,
+					model: model.id,
+					usage: {
+						input: 0,
+						output: 0,
+						cacheRead: 0,
+						cacheWrite: 0,
+						totalTokens: 0,
+						cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, total: 0 },
+					},
+					stopReason: "toolUse",
+					timestamp: now,
+				},
+				{
+					role: "toolResult",
+					toolCallId: "call_audio",
+					toolName: "read",
+					content: [
+						{ type: "text", text: "Read audio file [audio/mpeg]\n[Audio: [audio/mpeg]]" },
+						{ type: "audio", data: "abc", mimeType: "audio/mpeg" },
+					],
+					isError: false,
+					timestamp: now,
+				},
+			],
+		});
+
+		expect(contents).toHaveLength(4);
+		expect(contents[2].parts?.[0]?.functionResponse).toBeTruthy();
+		expect(contents[2].parts?.[0]?.functionResponse?.parts).toBeUndefined();
+		expect(contents[3].parts?.[0]?.text).toBe("Tool result media:");
+		expect(contents[3].parts?.[1]?.inlineData?.mimeType).toBe("audio/mp3");
+	});
 });

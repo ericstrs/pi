@@ -99,4 +99,52 @@ describe("openai-completions convertMessages", () => {
 		);
 		expect(imageParts.length).toBe(2);
 	});
+
+	it("batches non-image tool-result media after tool results", () => {
+		const { compat: _compat, ...baseModel } = getModel("openai", "gpt-4o-mini");
+		const model: Model<"openai-completions"> = {
+			...baseModel,
+			api: "openai-completions",
+			input: ["text", "image", "pdf", "video", "audio"],
+		};
+
+		const now = Date.now();
+		const assistantMessage: AssistantMessage = {
+			role: "assistant",
+			content: [{ type: "toolCall", id: "tool-audio", name: "read", arguments: { path: "test.mp3" } }],
+			api: model.api,
+			provider: model.provider,
+			model: model.id,
+			usage: emptyUsage,
+			stopReason: "toolUse",
+			timestamp: now,
+		};
+
+		const context: Context = {
+			messages: [
+				{ role: "user", content: "Read the audio", timestamp: now - 2 },
+				assistantMessage,
+				{
+					role: "toolResult",
+					toolCallId: "tool-audio",
+					toolName: "read",
+					content: [
+						{ type: "text", text: "Read audio file [audio/mpeg]" },
+						{ type: "audio", data: "ZmFrZQ==", mimeType: "audio/mpeg", name: "test.mp3" },
+					],
+					isError: false,
+					timestamp: now + 1,
+				},
+			],
+		};
+
+		const messages = convertMessages(model, context, compat);
+		const mediaMessage = messages[messages.length - 1];
+		expect(mediaMessage.role).toBe("user");
+		expect(Array.isArray(mediaMessage.content)).toBe(true);
+
+		const parts = mediaMessage.content as Array<{ type?: string; audio_url?: { url?: string } }>;
+		expect(parts[0]).toMatchObject({ type: "text", text: "Attached media from tool result:" });
+		expect(parts.find((part) => part.type === "audio_url")?.audio_url?.url).toBe("data:audio/mpeg;base64,ZmFrZQ==");
+	});
 });

@@ -631,7 +631,9 @@ function convertMessages(
 										case "image":
 											return { image: createImageBlock(c.mimeType, c.data) };
 										default:
-											throw new Error("Unknown user content type");
+											return {
+												text: `(${c.type} omitted: Bedrock serializer does not support native ${c.type})`,
+											};
 									}
 								}),
 				});
@@ -711,7 +713,13 @@ function convertMessages(
 						content: m.content.map((c) =>
 							c.type === "image"
 								? { image: createImageBlock(c.mimeType, c.data) }
-								: { text: sanitizeSurrogates(c.text) },
+								: {
+										text: sanitizeSurrogates(
+											c.type === "text"
+												? c.text
+												: `(${c.type} omitted: Bedrock serializer does not support native ${c.type})`,
+										),
+									},
 						),
 						status: m.isError ? ToolResultStatus.ERROR : ToolResultStatus.SUCCESS,
 					},
@@ -727,7 +735,13 @@ function convertMessages(
 							content: nextMsg.content.map((c) =>
 								c.type === "image"
 									? { image: createImageBlock(c.mimeType, c.data) }
-									: { text: sanitizeSurrogates(c.text) },
+									: {
+											text: sanitizeSurrogates(
+												c.type === "text"
+													? c.text
+													: `(${c.type} omitted: Bedrock serializer does not support native ${c.type})`,
+											),
+										},
 							),
 							status: nextMsg.isError ? ToolResultStatus.ERROR : ToolResultStatus.SUCCESS,
 						},

@@ -1,5 +1,6 @@
 import { createInterface } from "node:readline";
 import type { AgentTool } from "@earendil-works/pi-agent-core";
+import type { UserContent } from "@earendil-works/pi-ai";
 import { Text } from "@earendil-works/pi-tui";
 import { spawn } from "child_process";
 import { existsSync } from "fs";
@@ -78,7 +79,7 @@ function formatFindCall(
 
 function formatFindResult(
 	result: {
-		content: Array<{ type: string; text?: string; data?: string; mimeType?: string }>;
+		content: UserContent[];
 		details?: FindToolDetails;
 	},
 	options: ToolRenderResultOptions,

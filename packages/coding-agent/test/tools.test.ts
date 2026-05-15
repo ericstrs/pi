@@ -5,6 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { executeBashWithOperations } from "../src/core/bash-executor.js";
 import { type BashOperations, createBashTool, createLocalBashOperations } from "../src/core/tools/bash.js";
 import { computeEditsDiff } from "../src/core/tools/edit-diff.js";
+import { createReadToolDefinition } from "../src/core/tools/read.js";
 import {
 	createEditTool,
 	createFindTool,
@@ -198,6 +199,55 @@ describe("Coding Agent Tools", () => {
 
 			expect(output).toContain("definitely not a png");
 			expect(result.content.some((c: any) => c.type === "image")).toBe(false);
+		});
+
+		it.each([
+			["PDF", "application/pdf", "pdf", "sample.pdf"],
+			["video", "video/mp4", "video", "sample.mp4"],
+			["audio", "audio/mpeg", "audio", "sample.mp3"],
+		])("should read %s files as native media blocks", async (_label, mimeType, blockType, fileName) => {
+			const testFile = join(testDir, fileName);
+			const bytes = Buffer.from(`${blockType} bytes`);
+			const tool = createReadTool(testDir, {
+				operations: {
+					access: async () => {},
+					readFile: async () => bytes,
+					detectMediaMimeType: async () => mimeType,
+				},
+			});
+
+			const result = await tool.execute("test-call-media", { path: testFile });
+			const output = getTextOutput(result);
+
+			expect(output).toContain(`Read ${blockType === "pdf" ? "PDF" : blockType} file [${mimeType}]`);
+			const mediaBlock = result.content.find((c: any) => c.type === blockType) as any;
+			expect(mediaBlock).toBeDefined();
+			expect(mediaBlock.mimeType).toBe(mimeType);
+			expect(mediaBlock.name).toBe(fileName);
+			expect(mediaBlock.data).toBe(bytes.toString("base64"));
+		});
+
+		it("should add a model-support note for native media without rejecting the read", async () => {
+			const testFile = join(testDir, "sample.mp4");
+			const bytes = Buffer.from("video bytes");
+			const tool = createReadToolDefinition(testDir, {
+				operations: {
+					access: async () => {},
+					readFile: async () => bytes,
+					detectMediaMimeType: async () => "video/mp4",
+				},
+			});
+
+			const result = await tool.execute("test-call-media-note", { path: testFile }, undefined, undefined, {
+				model: { input: ["text"] },
+			} as any);
+			const output = getTextOutput(result);
+
+			expect(output).toContain("Read video file [video/mp4]");
+			expect(output).toContain(
+				"[Current model does not support video. The video will be omitted from this request.]",
+			);
+			expect(result.content.some((c: any) => c.type === "video")).toBe(true);
 		});
 	});
 

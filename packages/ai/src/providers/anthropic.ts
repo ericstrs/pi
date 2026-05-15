@@ -14,7 +14,6 @@ import type {
 	AssistantMessage,
 	CacheRetention,
 	Context,
-	ImageContent,
 	Message,
 	Model,
 	SimpleStreamOptions,
@@ -26,6 +25,7 @@ import type {
 	Tool,
 	ToolCall,
 	ToolResultMessage,
+	UserContent,
 } from "../types.js";
 import { AssistantMessageEventStream } from "../utils/event-stream.js";
 import { headersToRecord } from "../utils/headers.js";
@@ -108,53 +108,79 @@ const fromClaudeCodeName = (name: string, tools?: Tool[]) => {
 /**
  * Convert content blocks to Anthropic API format
  */
-function convertContentBlocks(content: (TextContent | ImageContent)[]):
-	| string
-	| Array<
-			| { type: "text"; text: string }
-			| {
-					type: "image";
-					source: {
-						type: "base64";
-						media_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp";
-						data: string;
-					};
-			  }
-	  > {
-	// If only text blocks, return as concatenated string for simplicity
-	const hasImages = content.some((c) => c.type === "image");
-	if (!hasImages) {
+function convertContentBlocks(content: UserContent[]): string | Array<Record<string, unknown>> {
+	const hasMedia = content.some((c) => c.type !== "text");
+	if (!hasMedia) {
 		return sanitizeSurrogates(content.map((c) => (c as TextContent).text).join("\n"));
 	}
 
-	// If we have images, convert to content block array
-	const blocks = content.map((block) => {
+	const blocks: Array<Record<string, unknown>> = content.map((block) => {
 		if (block.type === "text") {
+			return { type: "text", text: sanitizeSurrogates(block.text) };
+		}
+		if (block.type === "image") {
 			return {
-				type: "text" as const,
-				text: sanitizeSurrogates(block.text),
+				type: "image",
+				source: {
+					type: "base64",
+					media_type: block.mimeType as "image/jpeg" | "image/png" | "image/gif" | "image/webp",
+					data: block.data,
+				},
+			};
+		}
+		if (block.type === "pdf") {
+			return {
+				type: "document",
+				source: { type: "base64", media_type: "application/pdf", data: block.data },
+				title: block.name ?? null,
 			};
 		}
 		return {
-			type: "image" as const,
+			type: "text",
+			text: `(${block.type} omitted: Anthropic serializer does not support native ${block.type})`,
+		};
+	});
+
+	const hasText = blocks.some((b) => b.type === "text");
+	if (!hasText) {
+		blocks.unshift({ type: "text", text: "(see attached media)" });
+	}
+
+	return blocks;
+}
+
+function convertUserContentBlock(block: UserContent): ContentBlockParam {
+	if (block.type === "text") {
+		return {
+			type: "text",
+			text: sanitizeSurrogates(block.text),
+		};
+	}
+	if (block.type === "image") {
+		return {
+			type: "image",
 			source: {
-				type: "base64" as const,
+				type: "base64",
 				media_type: block.mimeType as "image/jpeg" | "image/png" | "image/gif" | "image/webp",
 				data: block.data,
 			},
 		};
-	});
-
-	// If only images (no text), add placeholder text block
-	const hasText = blocks.some((b) => b.type === "text");
-	if (!hasText) {
-		blocks.unshift({
-			type: "text" as const,
-			text: "(see attached image)",
-		});
 	}
-
-	return blocks;
+	if (block.type === "pdf") {
+		return {
+			type: "document",
+			source: {
+				type: "base64",
+				media_type: "application/pdf",
+				data: block.data,
+			},
+			title: block.name ?? null,
+		};
+	}
+	return {
+		type: "text",
+		text: `(${block.type} omitted: Anthropic serializer does not support native ${block.type})`,
+	};
 }
 
 export type AnthropicEffort = "low" | "medium" | "high" | "xhigh" | "max";
@@ -1014,23 +1040,7 @@ function convertMessages(
 					});
 				}
 			} else {
-				const blocks: ContentBlockParam[] = msg.content.map((item) => {
-					if (item.type === "text") {
-						return {
-							type: "text",
-							text: sanitizeSurrogates(item.text),
-						};
-					} else {
-						return {
-							type: "image",
-							source: {
-								type: "base64",
-								media_type: item.mimeType as "image/jpeg" | "image/png" | "image/gif" | "image/webp",
-								data: item.data,
-							},
-						};
-					}
-				});
+				const blocks: ContentBlockParam[] = msg.content.map(convertUserContentBlock);
 				const filteredBlocks = blocks.filter((b) => {
 					if (b.type === "text") {
 						return b.text.trim().length > 0;
@@ -1100,7 +1110,7 @@ function convertMessages(
 			toolResults.push({
 				type: "tool_result",
 				tool_use_id: msg.toolCallId,
-				content: convertContentBlocks(msg.content),
+				content: convertContentBlocks(msg.content) as any,
 				is_error: msg.isError,
 			});
 
@@ -1111,7 +1121,7 @@ function convertMessages(
 				toolResults.push({
 					type: "tool_result",
 					tool_use_id: nextMsg.toolCallId,
-					content: convertContentBlocks(nextMsg.content),
+					content: convertContentBlocks(nextMsg.content) as any,
 					is_error: nextMsg.isError,
 				});
 				j++;

@@ -144,7 +144,17 @@ const ModelDefinitionSchema = Type.Object({
 	baseUrl: Type.Optional(Type.String({ minLength: 1 })),
 	reasoning: Type.Optional(Type.Boolean()),
 	thinkingLevelMap: Type.Optional(ThinkingLevelMapSchema),
-	input: Type.Optional(Type.Array(Type.Union([Type.Literal("text"), Type.Literal("image")]))),
+	input: Type.Optional(
+		Type.Array(
+			Type.Union([
+				Type.Literal("text"),
+				Type.Literal("image"),
+				Type.Literal("pdf"),
+				Type.Literal("video"),
+				Type.Literal("audio"),
+			]),
+		),
+	),
 	cost: Type.Optional(
 		Type.Object({
 			input: Type.Number(),
@@ -164,7 +174,17 @@ const ModelOverrideSchema = Type.Object({
 	name: Type.Optional(Type.String({ minLength: 1 })),
 	reasoning: Type.Optional(Type.Boolean()),
 	thinkingLevelMap: Type.Optional(ThinkingLevelMapSchema),
-	input: Type.Optional(Type.Array(Type.Union([Type.Literal("text"), Type.Literal("image")]))),
+	input: Type.Optional(
+		Type.Array(
+			Type.Union([
+				Type.Literal("text"),
+				Type.Literal("image"),
+				Type.Literal("pdf"),
+				Type.Literal("video"),
+				Type.Literal("audio"),
+			]),
+		),
+	),
 	cost: Type.Optional(
 		Type.Object({
 			input: Type.Optional(Type.Number()),
@@ -596,7 +616,7 @@ export class ModelRegistry {
 					baseUrl,
 					reasoning: modelDef.reasoning ?? false,
 					thinkingLevelMap: modelDef.thinkingLevelMap,
-					input: (modelDef.input ?? ["text"]) as ("text" | "image")[],
+					input: (modelDef.input ?? ["text"]) as ("text" | "image" | "pdf" | "video" | "audio")[],
 					cost: modelDef.cost ?? defaultCost,
 					contextWindow: modelDef.contextWindow ?? 128000,
 					maxTokens: modelDef.maxTokens ?? 16384,
@@ -894,7 +914,7 @@ export class ModelRegistry {
 					baseUrl: modelDef.baseUrl ?? config.baseUrl!,
 					reasoning: modelDef.reasoning,
 					thinkingLevelMap: modelDef.thinkingLevelMap,
-					input: modelDef.input as ("text" | "image")[],
+					input: modelDef.input as ("text" | "image" | "pdf" | "video" | "audio")[],
 					cost: modelDef.cost,
 					contextWindow: modelDef.contextWindow,
 					maxTokens: modelDef.maxTokens,
@@ -943,7 +963,7 @@ export interface ProviderConfigInput {
 		baseUrl?: string;
 		reasoning: boolean;
 		thinkingLevelMap?: Model<Api>["thinkingLevelMap"];
-		input: ("text" | "image")[];
+		input: ("text" | "image" | "pdf" | "video" | "audio")[];
 		cost: { input: number; output: number; cacheRead: number; cacheWrite: number };
 		contextWindow: number;
 		maxTokens: number;

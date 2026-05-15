@@ -56,7 +56,7 @@ export class UserMessage extends LitElement {
 		const content =
 			typeof this.message.content === "string"
 				? this.message.content
-				: this.message.content.find((c) => c.type === "text")?.text || "";
+				: this.message.content.flatMap((c) => (c.type === "text" ? [c.text] : []))[0] || "";
 
 		return html`
 			<div class="flex justify-start mx-4">

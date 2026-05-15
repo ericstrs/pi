@@ -129,6 +129,38 @@ const EAGER_TOOL_INPUT_STREAMING_UNSUPPORTED_ANTHROPIC_MODELS = new Set([
 	"github-copilot:claude-sonnet-4",
 	"github-copilot:claude-sonnet-4.5",
 ]);
+type ModelInput = Model<any>["input"][number];
+
+const LEGACY_MODALITY_ALLOWLIST: ModelInput[] = ["text", "image"];
+const EXTENDED_MODALITY_ALLOWLIST: ModelInput[] = ["text", "image", "pdf", "video", "audio"];
+const EXTENDED_MODALITY_PROVIDER_ALLOWLIST = new Set<string>([
+	"google",
+	"anthropic",
+	"openai",
+	"openrouter",
+]);
+
+function getInputModalities(provider: string, upstreamInput: string[] | undefined): ModelInput[] {
+	const allowedModalities = EXTENDED_MODALITY_PROVIDER_ALLOWLIST.has(provider)
+		? EXTENDED_MODALITY_ALLOWLIST
+		: LEGACY_MODALITY_ALLOWLIST;
+	// OpenRouter reports PDF-capable inputs as "file" in
+	// architecture.input_modalities. Pi's first native file payload is PDF-only,
+	// so normalize provider "file" metadata to the narrower internal "pdf".
+	const normalizedUpstreamInput = upstreamInput?.flatMap((modality) =>
+		modality === "file" ? ["pdf"] : [modality],
+	);
+	const result: ModelInput[] = ["text"];
+
+	for (const modality of allowedModalities) {
+		if (modality === "text") continue;
+		if (normalizedUpstreamInput?.includes(modality)) {
+			result.push(modality);
+		}
+	}
+
+	return result;
+}
 
 const DEEPSEEK_V4_THINKING_LEVEL_MAP = {
 	minimal: null,
@@ -280,10 +312,10 @@ async function fetchOpenRouterModels(): Promise<Model<any>[]> {
 			modelKey = model.id; // Keep full ID for OpenRouter
 
 			// Parse input modalities
-			const input: ("text" | "image")[] = ["text"];
-			if (model.architecture?.modality?.includes("image")) {
-				input.push("image");
-			}
+			// OpenRouter's native model API exposes input modalities as
+			// architecture.input_modalities, e.g. ["text", "image", "file"].
+			// "file" means PDF-compatible in our current serializer surface.
+			const input = getInputModalities("openrouter", model.architecture?.input_modalities);
 
 			// Convert pricing from $/token to $/million tokens
 			const inputCost = parseFloat(model.pricing?.prompt || "0") * 1_000_000;
@@ -340,10 +372,11 @@ async function fetchAiGatewayModels(): Promise<Model<any>[]> {
 			// Only include models that support tools
 			if (!tags.includes("tool-use")) continue;
 
-			const input: ("text" | "image")[] = ["text"];
-			if (tags.includes("vision")) {
-				input.push("image");
-			}
+			const input: ModelInput[] = ["text"];
+			if (tags.includes("vision")) input.push("image");
+			// Vercel AI Gateway exposes file/PDF support as a capability tag,
+			// not as an input_modalities array.
+			if (tags.includes("file-input")) input.push("pdf");
 
 			const inputCost = toNumber(model.pricing?.input) * 1_000_000;
 			const outputCost = toNumber(model.pricing?.output) * 1_000_000;
@@ -410,7 +443,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					provider: "amazon-bedrock" as const,
 					baseUrl: getBedrockBaseUrl(id),
 					reasoning: m.reasoning === true,
-					input: (m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"]) as ("text" | "image")[],
+					input: getInputModalities("amazon-bedrock", m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -436,7 +469,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					provider: "anthropic",
 					baseUrl: "https://api.anthropic.com",
 					reasoning: m.reasoning === true,
-					input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+					input: getInputModalities("anthropic", m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -462,7 +495,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					provider: "google",
 					baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 					reasoning: m.reasoning === true,
-					input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+					input: getInputModalities("google", m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -488,7 +521,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					provider: "openai",
 					baseUrl: "https://api.openai.com/v1",
 					reasoning: m.reasoning === true,
-					input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+					input: getInputModalities("openai", m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -514,7 +547,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					provider: "groq",
 					baseUrl: "https://api.groq.com/openai/v1",
 					reasoning: m.reasoning === true,
-					input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+					input: getInputModalities("groq", m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -540,7 +573,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					provider: "cerebras",
 					baseUrl: "https://api.cerebras.ai/v1",
 					reasoning: m.reasoning === true,
-					input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+					input: getInputModalities("cerebras", m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -648,7 +681,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					provider: "xai",
 					baseUrl: "https://api.x.ai/v1",
 					reasoning: m.reasoning === true,
-					input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+					input: getInputModalities("xai", m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -666,8 +699,6 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 			for (const [modelId, model] of Object.entries(data["zai-coding-plan"].models)) {
 				const m = model as ModelsDevModel;
 				if (m.tool_call !== true) continue;
-				const supportsImage = m.modalities?.input?.includes("image");
-
 				models.push({
 					id: modelId,
 					name: m.name || modelId,
@@ -675,7 +706,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					provider: "zai",
 					baseUrl: "https://api.z.ai/api/coding/paas/v4",
 					reasoning: m.reasoning === true,
-					input: supportsImage ? ["text", "image"] : ["text"],
+					input: getInputModalities("zai", m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -706,7 +737,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					provider: "mistral",
 					baseUrl: "https://api.mistral.ai",
 					reasoning: m.reasoning === true,
-					input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+					input: getInputModalities("mistral", m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -732,7 +763,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					provider: "huggingface",
 					baseUrl: "https://router.huggingface.co/v1",
 					reasoning: m.reasoning === true,
-					input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+					input: getInputModalities("huggingface", m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -762,7 +793,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					// Fireworks Anthropic-compatible API - SDK appends /v1/messages
 					baseUrl: "https://api.fireworks.ai/inference",
 					reasoning: m.reasoning === true,
-					input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+					input: getInputModalities("fireworks", m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -888,7 +919,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					provider: variant.provider,
 					baseUrl,
 					reasoning: m.reasoning === true,
-					input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+					input: getInputModalities(variant.provider, m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -930,7 +961,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					provider: "github-copilot",
 					baseUrl: "https://api.individual.githubcopilot.com",
 					reasoning: m.reasoning === true,
-					input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+					input: getInputModalities("github-copilot", m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -975,7 +1006,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 						// MiniMax's Anthropic-compatible API - SDK appends /v1/messages
 						baseUrl,
 						reasoning: m.reasoning === true,
-						input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+						input: getInputModalities(provider, m.modalities?.input),
 						cost: {
 							input: m.cost?.input || 0,
 							output: m.cost?.output || 0,
@@ -1015,7 +1046,7 @@ async function loadModelsDevData(): Promise<Model<any>[]> {
 					baseUrl: "https://api.kimi.com/coding",
 					headers: { ...KIMI_STATIC_HEADERS },
 					reasoning: m.reasoning === true,
-					input: m.modalities?.input?.includes("image") ? ["text", "image"] : ["text"],
+					input: getInputModalities("kimi-coding", m.modalities?.input),
 					cost: {
 						input: m.cost?.input || 0,
 						output: m.cost?.output || 0,
@@ -1281,7 +1312,7 @@ async function generateModels() {
 			baseUrl: "https://generativelanguage.googleapis.com/v1beta",
 			provider: "google",
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf", "video", "audio"],
 			cost: {
 				input: 0,
 				output: 0,
@@ -1588,7 +1619,7 @@ async function generateModels() {
 			provider: "openai-codex",
 			baseUrl: CODEX_BASE_URL,
 			reasoning: true,
-			input: ["text", "image"],
+			input: ["text", "image", "pdf"],
 			cost: { input: 5, output: 30, cacheRead: 0.5, cacheWrite: 0 },
 			contextWindow: CODEX_CONTEXT,
 			maxTokens: CODEX_MAX_TOKENS,

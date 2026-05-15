@@ -30,7 +30,6 @@ import {
 	type Context,
 	calculateCost,
 	createAssistantMessageEventStream,
-	type ImageContent,
 	type Message,
 	type Model,
 	type OAuthCredentials,
@@ -42,6 +41,7 @@ import {
 	type Tool,
 	type ToolCall,
 	type ToolResultMessage,
+	type UserContent,
 } from "@earendil-works/pi-ai";
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
 
@@ -186,16 +186,22 @@ function sanitizeSurrogates(text: string): string {
 }
 
 function convertContentBlocks(
-	content: (TextContent | ImageContent)[],
+	content: UserContent[],
 ): string | Array<{ type: "text"; text: string } | { type: "image"; source: any }> {
-	const hasImages = content.some((c) => c.type === "image");
-	if (!hasImages) {
+	const hasMedia = content.some((c) => c.type !== "text");
+	if (!hasMedia) {
 		return sanitizeSurrogates(content.map((c) => (c as TextContent).text).join("\n"));
 	}
 
 	const blocks = content.map((block) => {
 		if (block.type === "text") {
 			return { type: "text" as const, text: sanitizeSurrogates(block.text) };
+		}
+		if (block.type !== "image") {
+			return {
+				type: "text" as const,
+				text: `(${block.type} omitted: custom Anthropic provider does not support native ${block.type})`,
+			};
 		}
 		return {
 			type: "image" as const,

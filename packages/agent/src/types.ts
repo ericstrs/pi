@@ -1,14 +1,13 @@
 import type {
 	AssistantMessage,
 	AssistantMessageEvent,
-	ImageContent,
 	Message,
 	Model,
 	SimpleStreamOptions,
 	streamSimple,
-	TextContent,
 	Tool,
 	ToolResultMessage,
+	UserContent,
 } from "@earendil-works/pi-ai";
 import type { Static, TSchema } from "typebox";
 
@@ -70,7 +69,7 @@ export interface BeforeToolCallResult {
  * There is no deep merge for `content` or `details`.
  */
 export interface AfterToolCallResult {
-	content?: (TextContent | ImageContent)[];
+	content?: UserContent[];
 	details?: unknown;
 	isError?: boolean;
 	/**
@@ -343,8 +342,8 @@ export interface AgentState {
 
 /** Final or partial result produced by a tool. */
 export interface AgentToolResult<T> {
-	/** Text or image content returned to the model. */
-	content: (TextContent | ImageContent)[];
+	/** Text or rendered media content returned to the model. */
+	content: UserContent[];
 	/** Arbitrary structured details for logs or UI rendering. */
 	details: T;
 	/**

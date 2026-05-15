@@ -1,4 +1,5 @@
 import { Box, type Component, Container, getCapabilities, Image, Spacer, Text, type TUI } from "@earendil-works/pi-tui";
+import type { UserContent } from "@earendil-works/pi-ai";
 import type { ToolDefinition, ToolRenderContext } from "../../../core/extensions/types.js";
 import { createAllToolDefinitions, type ToolName } from "../../../core/tools/index.js";
 import { getTextOutput as getRenderedTextOutput } from "../../../core/tools/render-utils.js";
@@ -33,7 +34,7 @@ export class ToolExecutionComponent extends Container {
 	private executionStarted = false;
 	private argsComplete = false;
 	private result?: {
-		content: Array<{ type: string; text?: string; data?: string; mimeType?: string }>;
+		content: UserContent[];
 		isError: boolean;
 		details?: any;
 	};
@@ -163,7 +164,7 @@ export class ToolExecutionComponent extends Container {
 
 	updateResult(
 		result: {
-			content: Array<{ type: string; text?: string; data?: string; mimeType?: string }>;
+			content: UserContent[];
 			details?: any;
 			isError: boolean;
 		},
