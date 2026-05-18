@@ -27,10 +27,7 @@ export function normalizeDisplayText(text: string): string {
 	return text.replace(/\r/g, "");
 }
 
-export function getTextOutput(
-	result: { content: UserContent[] } | undefined,
-	showImages: boolean,
-): string {
+export function getTextOutput(result: { content: UserContent[] } | undefined, showImages: boolean): string {
 	if (!result) return "";
 
 	const textBlocks = result.content.filter((c) => c.type === "text");

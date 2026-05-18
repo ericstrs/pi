@@ -35,7 +35,7 @@ function replaceUnsupportedMediaWithPlaceholders(
 	let changed = false;
 
 	for (const block of content) {
-		if (block.type !== "text" && !model.input.includes(block.type)) {
+		if (block.type !== "text" && block.type in MEDIA_PLACEHOLDERS && !model.input.includes(block.type)) {
 			const placeholder = placeholderFor(block.type, context);
 			if (lastGeneratedPlaceholder !== placeholder) result.push({ type: "text", text: placeholder });
 			lastGeneratedPlaceholder = placeholder;
