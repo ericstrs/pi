@@ -5,17 +5,17 @@ import { Text } from "@earendil-works/pi-tui";
 import { constants } from "fs";
 import { access as fsAccess, readFile as fsReadFile } from "fs/promises";
 import { type Static, Type } from "typebox";
-import { getReadmePath } from "../../config.js";
-import { keyHint, keyText } from "../../modes/interactive/components/keybinding-hints.js";
-import { getLanguageFromPath, highlightCode, type Theme } from "../../modes/interactive/theme/theme.js";
-import { formatDimensionNote, resizeImage } from "../../utils/image-resize.js";
-import { detectSupportedMediaMimeTypeFromFile } from "../../utils/mime.js";
-import { formatPathRelativeToCwdOrAbsolute } from "../../utils/paths.js";
-import type { ToolDefinition, ToolRenderResultOptions } from "../extensions/types.js";
-import { resolveReadPath } from "./path-utils.js";
-import { getTextOutput, invalidArgText, replaceTabs, shortenPath, str } from "./render-utils.js";
-import { wrapToolDefinition } from "./tool-definition-wrapper.js";
-import { DEFAULT_MAX_BYTES, DEFAULT_MAX_LINES, formatSize, type TruncationResult, truncateHead } from "./truncate.js";
+import { getReadmePath } from "../../config.ts";
+import { keyHint, keyText } from "../../modes/interactive/components/keybinding-hints.ts";
+import { getLanguageFromPath, highlightCode, type Theme } from "../../modes/interactive/theme/theme.ts";
+import { formatDimensionNote, resizeImage } from "../../utils/image-resize.ts";
+import { detectSupportedMediaMimeTypeFromFile } from "../../utils/mime.ts";
+import { formatPathRelativeToCwdOrAbsolute } from "../../utils/paths.ts";
+import type { ToolDefinition, ToolRenderResultOptions } from "../extensions/types.ts";
+import { resolveReadPathAsync, resolveToCwd } from "./path-utils.ts";
+import { getTextOutput, renderToolPath, replaceTabs, str } from "./render-utils.ts";
+import { wrapToolDefinition } from "./tool-definition-wrapper.ts";
+import { DEFAULT_MAX_BYTES, DEFAULT_MAX_LINES, formatSize, type TruncationResult, truncateHead } from "./truncate.ts";
 
 const readSchema = Type.Object({
 	path: Type.String({ description: "Path to the file to read (relative or absolute)" }),
@@ -73,11 +73,8 @@ function formatReadLineRange(args: ReadRenderArgs | undefined, theme: Theme): st
 	return theme.fg("warning", `:${startLine}${endLine ? `-${endLine}` : ""}`);
 }
 
-function formatReadCall(args: ReadRenderArgs | undefined, theme: Theme): string {
-	const rawPath = str(args?.file_path ?? args?.path);
-	const path = rawPath !== null ? shortenPath(rawPath) : null;
-	const invalidArg = invalidArgText(theme);
-	const pathDisplay = path === null ? invalidArg : path ? theme.fg("accent", path) : theme.fg("toolOutput", "...");
+function formatReadCall(args: ReadRenderArgs | undefined, theme: Theme, cwd: string): string {
+	const pathDisplay = renderToolPath(str(args?.file_path ?? args?.path), theme, cwd);
 	return `${theme.fg("toolTitle", theme.bold("read"))} ${pathDisplay}${formatReadLineRange(args, theme)}`;
 }
 
@@ -145,7 +142,7 @@ function getCompactReadClassification(
 	const rawPath = str(args?.file_path ?? args?.path);
 	if (!rawPath) return undefined;
 
-	const absolutePath = resolveReadPath(rawPath, cwd);
+	const absolutePath = resolveToCwd(rawPath, cwd);
 	const fileName = basename(absolutePath);
 	if (fileName === "SKILL.md") {
 		return { kind: "skill", label: basename(dirname(absolutePath)) || fileName };
@@ -191,10 +188,10 @@ function formatReadResult(
 	options: ToolRenderResultOptions,
 	theme: Theme,
 	showImages: boolean,
-	cwd: string,
+	_cwd: string,
 	isError: boolean,
 ): string {
-	if (!options.expanded && !isError && getCompactReadClassification(args, cwd)) {
+	if (!options.expanded && !isError) {
 		return "";
 	}
 
@@ -244,7 +241,6 @@ export function createReadToolDefinition(
 			_onUpdate?,
 			ctx?,
 		) {
-			const absolutePath = resolveReadPath(path, cwd);
 			return new Promise<{ content: UserContent[]; details: ReadToolDetails | undefined }>((resolve, reject) => {
 				if (signal?.aborted) {
 					reject(new Error("Operation aborted"));
@@ -259,6 +255,8 @@ export function createReadToolDefinition(
 
 				(async () => {
 					try {
+						const absolutePath = await resolveReadPathAsync(path, cwd);
+						if (aborted) return;
 						// Check if file exists and is readable.
 						await ops.access(absolutePath);
 						if (aborted) return;
@@ -277,7 +275,7 @@ export function createReadToolDefinition(
 							const base64 = buffer.toString("base64");
 							if (kind === "image" && autoResizeImages) {
 								// Resize image if needed before sending it back to the model.
-								const resized = await resizeImage({ type: "image", data: base64, mimeType });
+								const resized = await resizeImage(buffer, mimeType);
 								if (!resized) {
 									let textNote = `Read image file [${mimeType}]\n[Image omitted: could not be resized below the inline image size limit.]`;
 									if (unsupportedMediaNote) textNote += `\n${unsupportedMediaNote}`;
@@ -364,7 +362,7 @@ export function createReadToolDefinition(
 						if (aborted) return;
 						signal?.removeEventListener("abort", onAbort);
 						resolve({ content, details });
-					} catch (error: any) {
+					} catch (error: unknown) {
 						signal?.removeEventListener("abort", onAbort);
 						if (!aborted) reject(error);
 					}
@@ -375,7 +373,9 @@ export function createReadToolDefinition(
 			const text = (context.lastComponent as Text | undefined) ?? new Text("", 0, 0);
 			const classification = !context.expanded ? getCompactReadClassification(args, context.cwd) : undefined;
 			text.setText(
-				classification ? formatCompactReadCall(classification, args, theme) : formatReadCall(args, theme),
+				classification
+					? formatCompactReadCall(classification, args, theme)
+					: formatReadCall(args, theme, context.cwd),
 			);
 			return text;
 		},

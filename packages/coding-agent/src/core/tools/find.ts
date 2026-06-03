@@ -3,16 +3,16 @@ import type { AgentTool } from "@earendil-works/pi-agent-core";
 import type { UserContent } from "@earendil-works/pi-ai";
 import { Text } from "@earendil-works/pi-tui";
 import { spawn } from "child_process";
-import { existsSync } from "fs";
 import path from "path";
 import { type Static, Type } from "typebox";
-import { keyHint } from "../../modes/interactive/components/keybinding-hints.js";
-import { ensureTool } from "../../utils/tools-manager.js";
-import type { ToolDefinition, ToolRenderResultOptions } from "../extensions/types.js";
-import { resolveToCwd } from "./path-utils.js";
-import { getTextOutput, invalidArgText, shortenPath, str } from "./render-utils.js";
-import { wrapToolDefinition } from "./tool-definition-wrapper.js";
-import { DEFAULT_MAX_BYTES, formatSize, type TruncationResult, truncateHead } from "./truncate.js";
+import { keyHint } from "../../modes/interactive/components/keybinding-hints.ts";
+import type { Theme } from "../../modes/interactive/theme/theme.ts";
+import { ensureTool } from "../../utils/tools-manager.ts";
+import type { ToolDefinition, ToolRenderResultOptions } from "../extensions/types.ts";
+import { pathExists, resolveToCwd } from "./path-utils.ts";
+import { getTextOutput, invalidArgText, shortenPath, str } from "./render-utils.ts";
+import { wrapToolDefinition } from "./tool-definition-wrapper.ts";
+import { DEFAULT_MAX_BYTES, formatSize, type TruncationResult, truncateHead } from "./truncate.ts";
 
 function toPosixPath(value: string): string {
 	return value.split(path.sep).join("/");
@@ -47,7 +47,7 @@ export interface FindOperations {
 }
 
 const defaultFindOperations: FindOperations = {
-	exists: existsSync,
+	exists: pathExists,
 	// This is a placeholder. Actual fd execution happens in execute() when no custom glob is provided.
 	glob: () => [],
 };
@@ -57,10 +57,7 @@ export interface FindToolOptions {
 	operations?: FindOperations;
 }
 
-function formatFindCall(
-	args: { pattern: string; path?: string; limit?: number } | undefined,
-	theme: typeof import("../../modes/interactive/theme/theme.js").theme,
-): string {
+function formatFindCall(args: { pattern: string; path?: string; limit?: number } | undefined, theme: Theme): string {
 	const pattern = str(args?.pattern);
 	const rawPath = str(args?.path);
 	const path = rawPath !== null ? shortenPath(rawPath || ".") : null;
@@ -83,7 +80,7 @@ function formatFindResult(
 		details?: FindToolDetails;
 	},
 	options: ToolRenderResultOptions,
-	theme: typeof import("../../modes/interactive/theme/theme.js").theme,
+	theme: Theme,
 	showImages: boolean,
 ): string {
 	const output = getTextOutput(result, showImages).trim();

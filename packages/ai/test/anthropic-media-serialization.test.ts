@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { getModel } from "../src/models.js";
-import type { AssistantMessage, Context, ToolResultMessage, Usage } from "../src/types.js";
+import { getModel } from "../src/models.ts";
+import { streamAnthropic } from "../src/providers/anthropic.ts";
+import type { AssistantMessage, Context, ToolResultMessage, Usage } from "../src/types.ts";
 
 const mockState = vi.hoisted(() => ({
 	createParams: undefined as Record<string, unknown> | undefined,
@@ -58,7 +59,6 @@ function asRecord(value: unknown): Record<string, unknown> {
 }
 
 async function captureAnthropicMessages(context: Context): Promise<Record<string, unknown>[]> {
-	const { streamAnthropic } = await import("../src/providers/anthropic.js");
 	const model = getModel("anthropic", "claude-sonnet-4-6");
 	const stream = streamAnthropic(model, context, { apiKey: "test-key" });
 	for await (const event of stream) {

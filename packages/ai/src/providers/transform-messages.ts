@@ -1,4 +1,4 @@
-import type { Api, AssistantMessage, Message, Model, ToolCall, ToolResultMessage, UserContent } from "../types.js";
+import type { Api, AssistantMessage, Message, Model, ToolCall, ToolResultMessage, UserContent } from "../types.ts";
 
 type PlaceholderContext = "user" | "toolResult";
 

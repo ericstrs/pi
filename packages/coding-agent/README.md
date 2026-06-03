@@ -68,13 +68,15 @@ I regularly publish my own `pi-mono` work sessions here:
 ## Quick Start
 
 ```bash
-curl -fsSL https://pi.dev/install.sh | sh
+npm install -g --ignore-scripts @earendil-works/pi-coding-agent
 ```
 
-Or with npm:
+`--ignore-scripts` disables dependency lifecycle scripts during install. Pi does not require install scripts for normal npm installs.
+
+Installer alternative:
 
 ```bash
-npm install -g @earendil-works/pi-coding-agent
+curl -fsSL https://pi.dev/install.sh | sh
 ```
 
 Authenticate with an API key:
@@ -108,9 +110,11 @@ For each built-in provider, pi maintains a list of tool-capable models, updated 
 
 **API keys:**
 - Anthropic
+- Ant Ling
 - OpenAI
 - Azure OpenAI
 - DeepSeek
+- NVIDIA NIM
 - Google Gemini
 - Google Vertex
 - Amazon Bedrock
@@ -123,6 +127,7 @@ For each built-in provider, pi maintains a list of tool-capable models, updated 
 - OpenRouter
 - Vercel AI Gateway
 - ZAI
+- ZAI Coding Plan (China)
 - OpenCode Zen
 - OpenCode Go
 - Hugging Face
@@ -237,6 +242,7 @@ Sessions auto-save to `~/.pi/agent/sessions/` organized by working directory.
 pi -c                  # Continue most recent session
 pi -r                  # Browse and select from past sessions
 pi --no-session        # Ephemeral mode (don't save)
+pi --name "my task"    # Set session display name at startup
 pi --session <path|id> # Use specific session file or ID
 pi --fork <path|id>    # Fork specific session file or ID into a new session
 ```
@@ -287,7 +293,7 @@ See [docs/settings.md](docs/settings.md) for all options.
 Pi has two separate startup features:
 
 - **Update check:** fetches `https://pi.dev/api/latest-version` to check whether a newer Pi version exists. Disable it with `PI_SKIP_VERSION_CHECK=1`. Disabling update checks only turns off this check.
-- **Install/update telemetry:** after first install or a changelog-detected update, sends an anonymous version ping to `https://pi.dev/api/report-install`. Opt out by setting `enableInstallTelemetry` to `false` in `settings.json`, or by setting `PI_TELEMETRY=0`. This does not disable update checks; Pi may still contact `pi.dev` for the latest version unless update checks are disabled or offline mode is enabled.
+- **Install/update telemetry:** after first install or a changelog-detected update, sends an anonymous version ping to `https://pi.dev/api/report-install`. This setting also controls optional provider attribution headers for OpenRouter, Cloudflare, and direct NVIDIA NIM requests. Opt out by setting `enableInstallTelemetry` to `false` in `settings.json`, or by setting `PI_TELEMETRY=0`. This does not disable update checks; Pi may still contact `pi.dev` for the latest version unless update checks are disabled or offline mode is enabled.
 
 Use `--offline` or `PI_OFFLINE=1` to disable all startup network operations described here, including update checks, package update checks, and install/update telemetry.
 
@@ -406,7 +412,7 @@ pi update npm:@foo/pi-tools             # update one package
 pi config                               # enable/disable extensions, skills, prompts, themes
 ```
 
-Packages install to `~/.pi/agent/git/` (git) or `~/.pi/agent/npm/` (npm). Use `-l` for project-local installs (`.pi/git/`, `.pi/npm/`). Git packages install dependencies with `npm install --omit=dev` by default, so runtime deps must be listed under `dependencies`; when `npmCommand` is configured, git packages use plain `install` for compatibility with wrappers. If you use a Node version manager and want package installs to reuse a stable npm context, set `npmCommand` in `settings.json`, for example `["mise", "exec", "node@20", "--", "npm"]`.
+Packages install to `~/.pi/agent/git/` (git) or `~/.pi/agent/npm/` (npm). Use `-l` for project-local installs (`.pi/git/`, `.pi/npm/`). Git `@ref` values are pinned tags or commits; pinned packages are skipped by `pi update`, so use `pi install git:host/user/repo@new-ref` to move an existing package to a new ref. Git packages install dependencies with `npm install --omit=dev` by default, so runtime deps must be listed under `dependencies`; when `npmCommand` is configured, git packages use plain `install` for compatibility with wrappers. If you use a Node version manager and want package installs to reuse a stable npm context, set `npmCommand` in `settings.json`, for example `["mise", "exec", "node@20", "--", "npm"]`.
 
 Create a package by adding a `pi` key to `package.json`:
 
@@ -543,12 +549,14 @@ cat README.md | pi -p "Summarize this text"
 | `--fork <path\|id>` | Fork specific session file or partial UUID into a new session |
 | `--session-dir <dir>` | Custom session storage directory |
 | `--no-session` | Ephemeral mode (don't save) |
+| `--name <name>`, `-n <name>` | Set session display name at startup |
 
 ### Tool Options
 
 | Option | Description |
 |--------|-------------|
 | `--tools <list>`, `-t <list>` | Allowlist specific tool names across built-in, extension, and custom tools |
+| `--exclude-tools <list>`, `-xt <list>` | Disable specific tool names across built-in, extension, and custom tools |
 | `--no-builtin-tools`, `-nbt` | Disable built-in tools by default but keep extension/custom tools enabled |
 | `--no-tools`, `-nt` | Disable all tools by default |
 
@@ -602,6 +610,9 @@ pi -p "Summarize this codebase"
 # Non-interactive with piped stdin
 cat README.md | pi -p "Summarize this text"
 
+# Named one-shot session
+pi --name "release audit" -p "Audit this repository"
+
 # Different model
 pi --provider openai --model gpt-4o "Help me refactor"
 
@@ -617,6 +628,9 @@ pi --models "claude-*,gpt-4o"
 # Read-only mode
 pi --tools read,grep,find,ls -p "Review the code"
 
+# Disable one extension or built-in tool while keeping the rest available
+pi --exclude-tools ask_question
+
 # High thinking level
 pi --thinking high "Solve this complex problem"
 ```
@@ -630,7 +644,7 @@ pi --thinking high "Solve this complex problem"
 | `PI_PACKAGE_DIR` | Override package directory (useful for Nix/Guix where store paths tokenize poorly) |
 | `PI_OFFLINE` | Disable startup network operations, including update checks, package update checks, and install/update telemetry |
 | `PI_SKIP_VERSION_CHECK` | Skip the Pi version update check at startup. This prevents the `pi.dev` latest-version request |
-| `PI_TELEMETRY` | Override install/update telemetry. Use `1`/`true`/`yes` to enable or `0`/`false`/`no` to disable. This does not disable update checks |
+| `PI_TELEMETRY` | Override install/update telemetry and provider attribution headers. Use `1`/`true`/`yes` to enable or `0`/`false`/`no` to disable. This does not disable update checks |
 | `PI_CACHE_RETENTION` | Set to `long` for extended prompt cache (Anthropic: 1h, OpenAI: 24h) |
 | `VISUAL`, `EDITOR` | External editor for Ctrl+G |
 

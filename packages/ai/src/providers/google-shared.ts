@@ -3,9 +3,9 @@
  */
 
 import { type Content, FinishReason, FunctionCallingConfigMode, type Part } from "@google/genai";
-import type { Context, Model, StopReason, TextContent, Tool, UserContent } from "../types.js";
-import { sanitizeSurrogates } from "../utils/sanitize-unicode.js";
-import { transformMessages } from "./transform-messages.js";
+import type { Context, Model, StopReason, TextContent, Tool, UserContent } from "../types.ts";
+import { sanitizeSurrogates } from "../utils/sanitize-unicode.ts";
+import { transformMessages } from "./transform-messages.ts";
 
 type GoogleApiType = "google-generative-ai" | "google-vertex";
 
