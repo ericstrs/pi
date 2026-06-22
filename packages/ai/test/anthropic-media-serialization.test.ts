@@ -1,7 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { getModel } from "../src/models.ts";
-import { streamAnthropic } from "../src/providers/anthropic.ts";
-import type { AssistantMessage, Context, ToolResultMessage, Usage } from "../src/types.ts";
+import { stream as streamAnthropic } from "../src/api/anthropic-messages.ts";
+import type { AssistantMessage, Context, Model, ToolResultMessage, Usage } from "../src/types.ts";
 
 const mockState = vi.hoisted(() => ({
 	createParams: undefined as Record<string, unknown> | undefined,
@@ -53,14 +52,26 @@ const usage: Usage = {
 	cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, total: 0 },
 };
 
+const anthropicModel: Model<"anthropic-messages"> = {
+	id: "claude-sonnet-4-6",
+	name: "Claude Sonnet 4.6",
+	api: "anthropic-messages",
+	provider: "anthropic",
+	baseUrl: "https://api.anthropic.com",
+	reasoning: true,
+	input: ["text", "image", "pdf"],
+	cost: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0 },
+	contextWindow: 200000,
+	maxTokens: 64000,
+};
+
 function asRecord(value: unknown): Record<string, unknown> {
 	if (!value || typeof value !== "object") throw new Error("Expected object");
 	return value as Record<string, unknown>;
 }
 
 async function captureAnthropicMessages(context: Context): Promise<Record<string, unknown>[]> {
-	const model = getModel("anthropic", "claude-sonnet-4-6");
-	const stream = streamAnthropic(model, context, { apiKey: "test-key" });
+	const stream = streamAnthropic(anthropicModel, context, { apiKey: "test-key" });
 	for await (const event of stream) {
 		if (event.type === "error") break;
 	}

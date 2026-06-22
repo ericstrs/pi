@@ -5,9 +5,9 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import {
 	getOpenAICodexWebSocketDebugStats,
 	resetOpenAICodexWebSocketDebugStats,
-	streamOpenAICodexResponses,
-	streamSimpleOpenAICodexResponses,
-} from "../src/providers/openai-codex-responses.ts";
+	stream as streamOpenAICodexResponses,
+	streamSimple as streamSimpleOpenAICodexResponses,
+} from "../src/api/openai-codex-responses.ts";
 import type { Context, Model } from "../src/types.ts";
 
 const originalAgentDir = process.env.PI_CODING_AGENT_DIR;
@@ -361,13 +361,21 @@ describe("openai-codex streaming", () => {
 			apiKey: token,
 			transport: "sse",
 		}).result();
+		let settled = false;
+		const observedResultPromise = resultPromise.then((result) => {
+			settled = true;
+			return result;
+		});
 		await vi.advanceTimersByTimeAsync(0);
 		expect(fetchMock).toHaveBeenCalledTimes(1);
 
 		await vi.advanceTimersByTimeAsync(10_000);
-		const result = await resultPromise;
+		expect(settled).toBe(false);
+
+		await vi.advanceTimersByTimeAsync(10_000);
+		const result = await observedResultPromise;
 		expect(result.stopReason).toBe("error");
-		expect(result.errorMessage).toBe("Codex SSE response headers timed out after 10000ms");
+		expect(result.errorMessage).toBe("Codex SSE response headers timed out after 20000ms");
 	});
 
 	it("aborts SSE body reads after response headers arrive", async () => {

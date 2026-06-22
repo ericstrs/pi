@@ -1,10 +1,12 @@
 import type {
+	Api,
 	AssistantMessage,
 	AssistantMessageEvent,
+	AssistantMessageEventStream,
+	Context,
 	Message,
 	Model,
 	SimpleStreamOptions,
-	streamSimple,
 	Tool,
 	ToolResultMessage,
 	UserContent,
@@ -12,7 +14,8 @@ import type {
 import type { Static, TSchema } from "typebox";
 
 /**
- * Stream function used by the agent loop.
+ * Stream function used by the agent loop. `Models.streamSimple` satisfies
+ * this shape.
  *
  * Contract:
  * - Must not throw or return a rejected promise for request/model/runtime failures.
@@ -21,8 +24,10 @@ import type { Static, TSchema } from "typebox";
  *   final AssistantMessage with stopReason "error" or "aborted" and errorMessage.
  */
 export type StreamFn = (
-	...args: Parameters<typeof streamSimple>
-) => ReturnType<typeof streamSimple> | Promise<ReturnType<typeof streamSimple>>;
+	model: Model<Api>,
+	context: Context,
+	options?: SimpleStreamOptions,
+) => AssistantMessageEventStream | Promise<AssistantMessageEventStream>;
 
 /**
  * Configuration for how tool calls from a single assistant message are executed.
@@ -353,7 +358,12 @@ export interface AgentToolResult<T> {
 	terminate?: boolean;
 }
 
-/** Callback used by tools to stream partial execution updates. */
+/**
+ * Callback used by tools to stream partial execution updates.
+ *
+ * The callback is scoped to the current `execute()` invocation. Calls made after
+ * the tool promise settles are ignored.
+ */
 export type AgentToolUpdateCallback<T = any> = (partialResult: AgentToolResult<T>) => void;
 
 /** Tool definition used by the agent runtime. */
