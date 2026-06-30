@@ -8,7 +8,7 @@ import { type Static, Type } from "typebox";
 import { getReadmePath } from "../../config.ts";
 import { keyHint, keyText } from "../../modes/interactive/components/keybinding-hints.ts";
 import { getLanguageFromPath, highlightCode, type Theme } from "../../modes/interactive/theme/theme.ts";
-import { formatDimensionNote, resizeImage } from "../../utils/image-resize.ts";
+import { processImage } from "../../utils/image-process.ts";
 import { detectSupportedMediaMimeTypeFromFile } from "../../utils/mime.ts";
 import { formatPathRelativeToCwdOrAbsolute } from "../../utils/paths.ts";
 import type { ToolDefinition, ToolRenderResultOptions } from "../extensions/types.ts";
@@ -272,38 +272,33 @@ export function createReadToolDefinition(
 							if (!kind) throw new Error(`Unsupported detected media type: ${mimeType}`);
 							const unsupportedMediaNote = getUnsupportedMediaNote(ctx?.model, kind);
 							const buffer = await ops.readFile(absolutePath);
-							const base64 = buffer.toString("base64");
-							if (kind === "image" && autoResizeImages) {
-								// Resize image if needed before sending it back to the model.
-								const resized = await resizeImage(buffer, mimeType);
-								if (!resized) {
-									let textNote = `Read image file [${mimeType}]\n[Image omitted: could not be resized below the inline image size limit.]`;
+							if (kind === "image") {
+								const processed = await processImage(buffer, mimeType, { autoResizeImages });
+								if (!processed.ok) {
+									let textNote = `Read image file [${mimeType}]\n${processed.message}`;
 									if (unsupportedMediaNote) textNote += `\n${unsupportedMediaNote}`;
 									content = [{ type: "text", text: textNote }];
 								} else {
-									const dimensionNote = formatDimensionNote(resized);
-									let textNote = `Read image file [${resized.mimeType}]`;
-									if (dimensionNote) textNote += `\n${dimensionNote}`;
+									let textNote = `Read image file [${processed.mimeType}]`;
+									if (processed.hints.length > 0) textNote += `\n${processed.hints.join("\n")}`;
 									if (unsupportedMediaNote) textNote += `\n${unsupportedMediaNote}`;
 									content = [
 										{ type: "text", text: textNote },
-										{ type: "image", data: resized.data, mimeType: resized.mimeType },
+										{ type: "image", data: processed.data, mimeType: processed.mimeType },
 									];
 								}
-							} else if (kind === "image") {
-								let textNote = `Read image file [${mimeType}]`;
-								if (unsupportedMediaNote) textNote += `\n${unsupportedMediaNote}`;
-								content = [
-									{ type: "text", text: textNote },
-									{ type: "image", data: base64, mimeType },
-								];
 							} else {
 								let textNote = `Read ${mediaName(kind)} file [${mimeType}]`;
 								if (unsupportedMediaNote) textNote += `\n${unsupportedMediaNote}`;
-								content = [
-									{ type: "text", text: textNote },
-									{ type: kind, data: base64, mimeType, name: basename(absolutePath) },
-								] as UserContent[];
+								const data = buffer.toString("base64");
+								const name = basename(absolutePath);
+								const mediaContent: UserContent =
+									kind === "pdf"
+										? { type: "pdf", data, mimeType, name }
+										: kind === "video"
+											? { type: "video", data, mimeType, name }
+											: { type: "audio", data, mimeType, name };
+								content = [{ type: "text", text: textNote }, mediaContent];
 							}
 						} else {
 							// Read text content.
