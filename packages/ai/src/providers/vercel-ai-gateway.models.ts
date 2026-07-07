@@ -79,7 +79,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
-		input: ["text", "pdf"],
+		input: ["text"],
 		cost: {
 			input: 1.3,
 			output: 7.8,
@@ -385,7 +385,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
-		input: ["text", "pdf"],
+		input: ["text"],
 		cost: {
 			input: 1.25,
 			output: 3.75,
@@ -419,7 +419,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 0.3,
 			output: 2.5,
@@ -436,7 +436,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: false,
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 0.06,
 			output: 0.24,
@@ -470,7 +470,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: false,
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 0.8,
 			output: 3.2,
@@ -513,6 +513,25 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		},
 		contextWindow: 200000,
 		maxTokens: 8192,
+	} satisfies Model<"anthropic-messages">,
+	"anthropic/claude-fable-5": {
+		id: "anthropic/claude-fable-5",
+		name: "Claude Fable 5",
+		api: "anthropic-messages",
+		provider: "vercel-ai-gateway",
+		baseUrl: "https://ai-gateway.vercel.sh",
+		compat: {"forceAdaptiveThinking":true},
+		reasoning: true,
+		thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
+		input: ["text", "image", "pdf"],
+		cost: {
+			input: 10,
+			output: 50,
+			cacheRead: 1,
+			cacheWrite: 12.5,
+		},
+		contextWindow: 1000000,
+		maxTokens: 128000,
 	} satisfies Model<"anthropic-messages">,
 	"anthropic/claude-haiku-4.5": {
 		id: "anthropic/claude-haiku-4.5",
@@ -699,7 +718,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		baseUrl: "https://ai-gateway.vercel.sh",
 		compat: {"forceAdaptiveThinking":true},
 		reasoning: true,
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 2,
 			output: 10,
@@ -886,7 +905,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: false,
-		input: ["text", "image", "pdf"],
+		input: ["text"],
 		cost: {
 			input: 0.28,
 			output: 0.42,
@@ -903,7 +922,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
-		input: ["text", "image", "pdf"],
+		input: ["text"],
 		cost: {
 			input: 0.62,
 			output: 1.85,
@@ -920,7 +939,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
-		input: ["text", "image", "pdf"],
+		input: ["text"],
 		cost: {
 			input: 0.14,
 			output: 0.28,
@@ -937,7 +956,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
-		input: ["text", "pdf"],
+		input: ["text"],
 		cost: {
 			input: 0.435,
 			output: 0.87,
@@ -1175,7 +1194,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 1.5,
 			output: 3.5,
@@ -1617,7 +1636,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: false,
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 0.2,
 			output: 0.2,
@@ -1838,7 +1857,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
-		input: ["text", "image", "pdf"],
+		input: ["text", "image"],
 		cost: {
 			input: 0.95,
 			output: 4,
@@ -2598,7 +2617,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
-		input: ["text", "pdf"],
+		input: ["text"],
 		cost: {
 			input: 1.1,
 			output: 4.4,
@@ -2921,7 +2940,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
-		input: ["text", "image", "pdf"],
+		input: ["text", "pdf"],
 		cost: {
 			input: 0.435,
 			output: 0.87,
@@ -3125,7 +3144,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
-		input: ["text", "image", "pdf"],
+		input: ["text"],
 		cost: {
 			input: 1.3,
 			output: 4.3,
@@ -3144,12 +3163,12 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		reasoning: true,
 		input: ["text"],
 		cost: {
-			input: 1.5,
-			output: 4.5,
-			cacheRead: 0.3,
+			input: 1.4,
+			output: 4.4,
+			cacheRead: 0.26,
 			cacheWrite: 0,
 		},
-		contextWindow: 1000000,
+		contextWindow: 1040000,
 		maxTokens: 128000,
 	} satisfies Model<"anthropic-messages">,
 	"zai/glm-5.2-fast": {
