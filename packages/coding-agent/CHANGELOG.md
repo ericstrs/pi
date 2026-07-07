@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Added `CreateAgentSessionOptions.serviceTier` and model-level `serviceTiers` support in `models.json` / `pi.registerProvider()` metadata.
+
 ## [0.80.3] - 2026-06-30
 
 ### New Features

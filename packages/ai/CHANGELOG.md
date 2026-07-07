@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Added generic `ServiceTier` metadata and forwarding through `SimpleStreamOptions.serviceTier`, allowing model catalogs to advertise supported service tiers such as OpenAI priority mode.
+
 ## [0.80.3] - 2026-06-30
 
 ### Added

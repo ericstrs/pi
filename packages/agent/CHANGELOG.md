@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Added `AgentOptions.serviceTier` and proxy serialization for forwarding provider service-tier selections through agent runs.
+
 ## [0.80.3] - 2026-06-30
 
 ### Added

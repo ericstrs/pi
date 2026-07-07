@@ -96,6 +96,7 @@ export interface ThinkingBudgets {
 export type CacheRetention = "none" | "short" | "long";
 
 export type Transport = "sse" | "websocket" | "websocket-cached" | "auto";
+export type ServiceTier = "auto" | "default" | "flex" | "priority";
 
 /** Provider-scoped environment overrides. Values take precedence over process.env. */
 export type ProviderEnv = Record<string, string>;
@@ -289,6 +290,7 @@ export type ProviderImagesOptions = ImagesOptions & Record<string, unknown>;
 // Unified options with reasoning passed to streamSimple() and completeSimple()
 export interface SimpleStreamOptions extends StreamOptions {
 	reasoning?: ThinkingLevel;
+	serviceTier?: ServiceTier;
 	/** Custom token budgets for thinking levels (token-based providers only) */
 	thinkingBudgets?: ThinkingBudgets;
 }
@@ -693,6 +695,7 @@ export interface Model<TApi extends Api> {
 	provider: ProviderId;
 	baseUrl: string;
 	reasoning: boolean;
+	serviceTiers?: ServiceTier[];
 	/**
 	 * Maps pi thinking levels to provider/model-specific values.
 	 * Missing keys use provider defaults. null marks a level as unsupported.
@@ -719,7 +722,10 @@ export interface Model<TApi extends Api> {
 }
 
 export interface ImagesModel<TApi extends ImagesApi>
-	extends Omit<Model<Api>, "api" | "provider" | "reasoning" | "contextWindow" | "maxTokens" | "compat"> {
+	extends Omit<
+		Model<Api>,
+		"api" | "provider" | "reasoning" | "serviceTiers" | "contextWindow" | "maxTokens" | "compat"
+	> {
 	api: TApi;
 	provider: ImagesProviderId;
 	output: ("text" | "image")[];

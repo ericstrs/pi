@@ -11,6 +11,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: false,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text"],
 		cost: {
 			input: 30,
@@ -28,6 +29,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: false,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image"],
 		cost: {
 			input: 10,
@@ -45,6 +47,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: false,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image", "pdf"],
 		cost: {
 			input: 2,
@@ -62,6 +65,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: false,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image", "pdf"],
 		cost: {
 			input: 0.4,
@@ -79,6 +83,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: false,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image"],
 		cost: {
 			input: 0.1,
@@ -96,6 +101,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: false,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image", "pdf"],
 		cost: {
 			input: 2.5,
@@ -113,6 +119,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: false,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image"],
 		cost: {
 			input: 5,
@@ -130,6 +137,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: false,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image"],
 		cost: {
 			input: 2.5,
@@ -147,6 +155,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: false,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image"],
 		cost: {
 			input: 2.5,
@@ -164,6 +173,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: false,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image", "pdf"],
 		cost: {
 			input: 0.15,
@@ -181,6 +191,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null},
 		input: ["text", "image"],
 		cost: {
@@ -199,6 +210,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: false,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null},
 		input: ["text", "image"],
 		cost: {
@@ -217,6 +229,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null},
 		input: ["text", "image"],
 		cost: {
@@ -235,6 +248,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null},
 		input: ["text", "image"],
 		cost: {
@@ -253,6 +267,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null},
 		input: ["text", "image"],
 		cost: {
@@ -271,6 +286,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null},
 		input: ["text", "image"],
 		cost: {
@@ -289,6 +305,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":"none"},
 		input: ["text", "image"],
 		cost: {
@@ -307,6 +324,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null},
 		input: ["text", "image"],
 		cost: {
@@ -325,6 +343,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null},
 		input: ["text", "image"],
 		cost: {
@@ -343,6 +362,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null},
 		input: ["text", "image"],
 		cost: {
@@ -361,6 +381,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null},
 		input: ["text", "image"],
 		cost: {
@@ -379,6 +400,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":"none","xhigh":"xhigh"},
 		input: ["text", "image"],
 		cost: {
@@ -397,6 +419,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
 		input: ["text", "image"],
 		cost: {
@@ -415,6 +438,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
 		input: ["text", "image", "pdf"],
 		cost: {
@@ -433,6 +457,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
 		input: ["text", "image"],
 		cost: {
@@ -451,6 +476,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: false,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
 		input: ["text", "image"],
 		cost: {
@@ -469,6 +495,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":"none","xhigh":"xhigh"},
 		input: ["text", "image", "pdf"],
 		cost: {
@@ -487,6 +514,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
 		input: ["text", "image", "pdf"],
 		cost: {
@@ -505,6 +533,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":"none","xhigh":"xhigh"},
 		input: ["text", "image", "pdf"],
 		cost: {
@@ -523,6 +552,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":"none","xhigh":"xhigh"},
 		input: ["text", "image"],
 		cost: {
@@ -541,6 +571,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":"none","xhigh":"xhigh"},
 		input: ["text", "image"],
 		cost: {
@@ -559,6 +590,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null,"xhigh":"xhigh"},
 		input: ["text", "image"],
 		cost: {
@@ -577,6 +609,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":"none","xhigh":"xhigh","minimal":null},
 		input: ["text", "image", "pdf"],
 		cost: {
@@ -595,6 +628,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"off":null,"xhigh":"xhigh","minimal":null,"low":null},
 		input: ["text", "image", "pdf"],
 		cost: {
@@ -613,6 +647,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image", "pdf"],
 		cost: {
 			input: 15,
@@ -630,6 +665,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image"],
 		cost: {
 			input: 150,
@@ -647,6 +683,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image", "pdf"],
 		cost: {
 			input: 2,
@@ -664,6 +701,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image"],
 		cost: {
 			input: 10,
@@ -681,6 +719,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text"],
 		cost: {
 			input: 1.1,
@@ -698,6 +737,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image"],
 		cost: {
 			input: 20,
@@ -715,6 +755,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image"],
 		cost: {
 			input: 1.1,
@@ -732,6 +773,7 @@ export const OPENAI_MODELS = {
 		provider: "openai",
 		baseUrl: "https://api.openai.com/v1",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		input: ["text", "image"],
 		cost: {
 			input: 2,

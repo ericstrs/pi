@@ -9,7 +9,7 @@ import {
 	CLOUDFLARE_AI_GATEWAY_OPENAI_BASE_URL,
 	CLOUDFLARE_WORKERS_AI_BASE_URL,
 } from "../src/api/cloudflare.ts";
-import type { AnthropicMessagesCompat, Api, KnownProvider, Model, OpenAICompletionsCompat } from "../src/types.ts";
+import type { AnthropicMessagesCompat, Api, KnownProvider, Model, OpenAICompletionsCompat, ServiceTier } from "../src/types.ts";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -69,6 +69,7 @@ const KIMI_STATIC_HEADERS = {
 } as const;
 
 const MOONSHOT_CN_MIRRORED_MODEL_IDS = new Set(["kimi-k2.7-code", "kimi-k2.7-code-highspeed"]);
+const OPENAI_SERVICE_TIERS: ServiceTier[] = ["auto", "default", "flex", "priority"];
 
 const TOGETHER_BASE_URL = "https://api.together.ai/v1";
 const TOGETHER_BASE_COMPAT: OpenAICompletionsCompat = {
@@ -2271,6 +2272,12 @@ async function generateModels() {
 	for (const model of allModels) {
 		applyThinkingLevelMetadata(model);
 		applyOpenAICompletionsCompatMetadata(model);
+		if (
+			(model.provider === "openai" && model.api === "openai-responses") ||
+			(model.provider === "openai-codex" && model.api === "openai-codex-responses")
+		) {
+			model.serviceTiers = [...OPENAI_SERVICE_TIERS];
+		}
 	}
 
 	// Group by provider and deduplicate by model ID
@@ -2309,6 +2316,9 @@ async function generateModels() {
 			output += `${indent}\tcompat: ${JSON.stringify(model.compat)},\n`;
 		}
 		output += `${indent}\treasoning: ${model.reasoning},\n`;
+		if (model.serviceTiers) {
+			output += `${indent}\tserviceTiers: [${model.serviceTiers.map(tier => `"${tier}"`).join(", ")}],\n`;
+		}
 		if (model.thinkingLevelMap) {
 			output += `${indent}\tthinkingLevelMap: ${JSON.stringify(model.thinkingLevelMap)},\n`;
 		}

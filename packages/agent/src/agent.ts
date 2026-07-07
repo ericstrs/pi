@@ -2,6 +2,7 @@ import {
 	type ImageContent,
 	type Message,
 	type Model,
+	type ServiceTier,
 	type SimpleStreamOptions,
 	streamSimple,
 	type TextContent,
@@ -114,6 +115,7 @@ export interface AgentOptions {
 	steeringMode?: QueueMode;
 	followUpMode?: QueueMode;
 	sessionId?: string;
+	serviceTier?: ServiceTier;
 	thinkingBudgets?: ThinkingBudgets;
 	transport?: Transport;
 	maxRetryDelayMs?: number;
@@ -198,6 +200,8 @@ export class Agent {
 	private activeRun?: ActiveRun;
 	/** Session identifier forwarded to providers for cache-aware backends. */
 	public sessionId?: string;
+	/** Optional provider service tier forwarded to the stream function. */
+	public serviceTier?: ServiceTier;
 	/** Optional per-level thinking token budgets forwarded to the stream function. */
 	public thinkingBudgets?: ThinkingBudgets;
 	/** Preferred transport forwarded to the stream function. */
@@ -222,6 +226,7 @@ export class Agent {
 		this.steeringQueue = new PendingMessageQueue(options.steeringMode ?? "one-at-a-time");
 		this.followUpQueue = new PendingMessageQueue(options.followUpMode ?? "one-at-a-time");
 		this.sessionId = options.sessionId;
+		this.serviceTier = options.serviceTier;
 		this.thinkingBudgets = options.thinkingBudgets;
 		this.transport = options.transport ?? "auto";
 		this.maxRetryDelayMs = options.maxRetryDelayMs;
@@ -435,6 +440,7 @@ export class Agent {
 			model: this._state.model,
 			reasoning: this._state.thinkingLevel === "off" ? undefined : this._state.thinkingLevel,
 			sessionId: this.sessionId,
+			serviceTier: this.serviceTier,
 			onPayload: this.onPayload,
 			onResponse: this.onResponse,
 			transport: this.transport,

@@ -11,6 +11,7 @@ export const OPENAI_CODEX_MODELS = {
 		provider: "openai-codex",
 		baseUrl: "https://chatgpt.com/backend-api",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"xhigh":"xhigh","minimal":"low"},
 		input: ["text"],
 		cost: {
@@ -29,6 +30,7 @@ export const OPENAI_CODEX_MODELS = {
 		provider: "openai-codex",
 		baseUrl: "https://chatgpt.com/backend-api",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"xhigh":"xhigh","minimal":"low"},
 		input: ["text", "image"],
 		cost: {
@@ -47,6 +49,7 @@ export const OPENAI_CODEX_MODELS = {
 		provider: "openai-codex",
 		baseUrl: "https://chatgpt.com/backend-api",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"xhigh":"xhigh","minimal":"low"},
 		input: ["text", "image"],
 		cost: {
@@ -65,6 +68,7 @@ export const OPENAI_CODEX_MODELS = {
 		provider: "openai-codex",
 		baseUrl: "https://chatgpt.com/backend-api",
 		reasoning: true,
+		serviceTiers: ["auto", "default", "flex", "priority"],
 		thinkingLevelMap: {"xhigh":"xhigh","minimal":"low"},
 		input: ["text", "image", "pdf"],
 		cost: {

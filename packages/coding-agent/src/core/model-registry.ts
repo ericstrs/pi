@@ -16,6 +16,7 @@ import {
 	type OpenAIResponsesCompat,
 	registerApiProvider,
 	resetApiProviders,
+	type ServiceTier,
 	type SimpleStreamOptions,
 } from "@earendil-works/pi-ai/compat";
 import { registerOAuthProvider, resetOAuthProviders } from "@earendil-works/pi-ai/oauth";
@@ -95,6 +96,12 @@ const ThinkingLevelMapSchema = Type.Object({
 	high: Type.Optional(ThinkingLevelMapValueSchema),
 	xhigh: Type.Optional(ThinkingLevelMapValueSchema),
 });
+const ServiceTierSchema = Type.Union([
+	Type.Literal("auto"),
+	Type.Literal("default"),
+	Type.Literal("flex"),
+	Type.Literal("priority"),
+]);
 
 const ChatTemplateKwargScalarSchema = Type.Union([Type.String(), Type.Number(), Type.Boolean(), Type.Null()]);
 const ChatTemplateKwargVariableSchema = Type.Object({
@@ -163,6 +170,7 @@ const ModelDefinitionSchema = Type.Object({
 	api: Type.Optional(Type.String({ minLength: 1 })),
 	baseUrl: Type.Optional(Type.String({ minLength: 1 })),
 	reasoning: Type.Optional(Type.Boolean()),
+	serviceTiers: Type.Optional(Type.Array(ServiceTierSchema)),
 	thinkingLevelMap: Type.Optional(ThinkingLevelMapSchema),
 	input: Type.Optional(
 		Type.Array(
@@ -193,6 +201,7 @@ const ModelDefinitionSchema = Type.Object({
 const ModelOverrideSchema = Type.Object({
 	name: Type.Optional(Type.String({ minLength: 1 })),
 	reasoning: Type.Optional(Type.Boolean()),
+	serviceTiers: Type.Optional(Type.Array(ServiceTierSchema)),
 	thinkingLevelMap: Type.Optional(ThinkingLevelMapSchema),
 	input: Type.Optional(
 		Type.Array(
@@ -340,6 +349,7 @@ function applyModelOverride(model: Model<Api>, override: ModelOverride): Model<A
 	// Simple field overrides
 	if (override.name !== undefined) result.name = override.name;
 	if (override.reasoning !== undefined) result.reasoning = override.reasoning;
+	if (override.serviceTiers !== undefined) result.serviceTiers = override.serviceTiers;
 	if (override.thinkingLevelMap !== undefined) {
 		result.thinkingLevelMap = { ...model.thinkingLevelMap, ...override.thinkingLevelMap };
 	}
@@ -635,6 +645,7 @@ export class ModelRegistry {
 					provider: providerName,
 					baseUrl,
 					reasoning: modelDef.reasoning ?? false,
+					serviceTiers: modelDef.serviceTiers,
 					thinkingLevelMap: modelDef.thinkingLevelMap,
 					input: (modelDef.input ?? ["text"]) as ("text" | "image" | "pdf" | "video" | "audio")[],
 					cost: modelDef.cost ?? defaultCost,
@@ -950,6 +961,7 @@ export class ModelRegistry {
 					provider: providerName,
 					baseUrl: modelDef.baseUrl ?? config.baseUrl!,
 					reasoning: modelDef.reasoning,
+					serviceTiers: modelDef.serviceTiers,
 					thinkingLevelMap: modelDef.thinkingLevelMap,
 					input: modelDef.input as ("text" | "image" | "pdf" | "video" | "audio")[],
 					cost: modelDef.cost,
@@ -999,6 +1011,7 @@ export interface ProviderConfigInput {
 		api?: Api;
 		baseUrl?: string;
 		reasoning: boolean;
+		serviceTiers?: ServiceTier[];
 		thinkingLevelMap?: Model<Api>["thinkingLevelMap"];
 		input: ("text" | "image" | "pdf" | "video" | "audio")[];
 		cost: { input: number; output: number; cacheRead: number; cacheWrite: number };

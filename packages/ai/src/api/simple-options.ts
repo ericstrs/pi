@@ -23,12 +23,13 @@ export function buildBaseOptions(
 	context: Context,
 	options?: SimpleStreamOptions,
 	apiKey?: string,
-): StreamOptions {
+): StreamOptions & Pick<SimpleStreamOptions, "serviceTier"> {
 	return {
 		temperature: options?.temperature,
 		maxTokens: clampMaxTokensToContext(model, context, options?.maxTokens ?? model.maxTokens),
 		signal: options?.signal,
 		apiKey: apiKey || options?.apiKey,
+		serviceTier: options?.serviceTier,
 		transport: options?.transport,
 		cacheRetention: options?.cacheRetention,
 		sessionId: options?.sessionId,
