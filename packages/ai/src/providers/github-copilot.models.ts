@@ -181,11 +181,11 @@ export const GITHUB_COPILOT_MODELS = {
 	"claude-sonnet-5": {
 		id: "claude-sonnet-5",
 		name: "Claude Sonnet 5",
-		api: "openai-completions",
+		api: "anthropic-messages",
 		provider: "github-copilot",
 		baseUrl: "https://api.individual.githubcopilot.com",
 		headers: {"User-Agent":"GitHubCopilotChat/0.35.0","Editor-Version":"vscode/1.107.0","Editor-Plugin-Version":"copilot-chat/0.35.0","Copilot-Integration-Id":"vscode-chat"},
-		compat: {"supportsStore":false,"supportsDeveloperRole":false,"supportsReasoningEffort":false},
+		compat: {"forceAdaptiveThinking":true},
 		reasoning: true,
 		input: ["text", "image"],
 		cost: {
@@ -196,7 +196,7 @@ export const GITHUB_COPILOT_MODELS = {
 		},
 		contextWindow: 1000000,
 		maxTokens: 128000,
-	} satisfies Model<"openai-completions">,
+	} satisfies Model<"anthropic-messages">,
 	"gemini-2.5-pro": {
 		id: "gemini-2.5-pro",
 		name: "Gemini 2.5 Pro",

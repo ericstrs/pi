@@ -296,7 +296,9 @@ export function convertResponsesMessages<TApi extends Api>(
 				output = contentParts;
 			} else {
 				const textOutput = [hasText ? textResult : "", unsupportedToolMediaText].filter(Boolean).join("\n");
-				output = sanitizeSurrogates(textOutput || "(see attached media)");
+				output = sanitizeSurrogates(
+					textOutput || (mediaBlocks.length > 0 ? "(see attached media)" : "(no tool output)"),
+				);
 			}
 
 			messages.push({

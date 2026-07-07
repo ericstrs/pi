@@ -78,7 +78,10 @@ export function transformMessages<TApi extends Api>(
 ): Message[] {
 	// Build a map of original tool call IDs to normalized IDs
 	const toolCallIdMap = new Map<string, string>();
-	const mediaAwareMessages = downgradeUnsupportedMedia(messages, model);
+	// Normalize null/undefined content from untyped callers (custom tools, hand-built
+	// histories, old session files) so downstream code can rely on the type contract.
+	const normalizedMessages = messages.map((msg) => (msg.content == null ? { ...msg, content: [] } : msg));
+	const mediaAwareMessages = downgradeUnsupportedMedia(normalizedMessages, model);
 
 	// First pass: transform messages (unsupported media downgrade, thinking blocks, tool call ID normalization)
 	const transformed = mediaAwareMessages.map((msg) => {

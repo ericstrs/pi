@@ -54,6 +54,17 @@ function buildToolResult(toolCallId: string, timestamp: number): ToolResultMessa
 	};
 }
 
+function buildEmptyToolResult(toolCallId: string, timestamp: number): ToolResultMessage {
+	return {
+		role: "toolResult",
+		toolCallId,
+		toolName: "bash",
+		content: [{ type: "text", text: "" }],
+		isError: false,
+		timestamp,
+	};
+}
+
 describe("openai-completions convertMessages", () => {
 	it("batches tool-result images after consecutive tool results", () => {
 		const { compat: _compat, ...baseModel } = getModel("openai", "gpt-4o-mini");
@@ -147,5 +158,40 @@ describe("openai-completions convertMessages", () => {
 		const parts = mediaMessage.content as Array<{ type?: string; audio_url?: { url?: string } }>;
 		expect(parts[0]).toMatchObject({ type: "text", text: "Attached media from tool result:" });
 		expect(parts.find((part) => part.type === "audio_url")?.audio_url?.url).toBe("data:audio/mpeg;base64,ZmFrZQ==");
+	});
+
+	it("uses '(no tool output)' placeholder for empty tool results without images", () => {
+		const { compat: _compat, ...baseModel } = getModel("openai", "gpt-4o-mini");
+		const model: Model<"openai-completions"> = {
+			...baseModel,
+			api: "openai-completions",
+			input: ["text", "image"],
+		};
+
+		const now = Date.now();
+		const assistantMessage: AssistantMessage = {
+			role: "assistant",
+			content: [{ type: "toolCall", id: "tool-1", name: "bash", arguments: { command: "true" } }],
+			api: model.api,
+			provider: model.provider,
+			model: model.id,
+			usage: emptyUsage,
+			stopReason: "toolUse",
+			timestamp: now,
+		};
+
+		const context: Context = {
+			messages: [
+				{ role: "user", content: "Run the command", timestamp: now - 1 },
+				assistantMessage,
+				buildEmptyToolResult("tool-1", now + 1),
+			],
+		};
+
+		const messages = convertMessages(model, context, compat);
+		const toolMessage = messages.find((m) => m.role === "tool") as { role: "tool"; content: string } | undefined;
+		expect(toolMessage).toBeTruthy();
+		expect(toolMessage?.content).toBe("(no tool output)");
+		expect(toolMessage?.content).not.toContain("see attached image");
 	});
 });

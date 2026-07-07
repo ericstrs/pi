@@ -1046,12 +1046,15 @@ export function convertMessages(
 
 				// Always send tool result with text (or placeholder if only media)
 				const hasText = textResult.length > 0;
+				const toolResultText = hasText
+					? textResult
+					: supportedMedia.length > 0
+						? "(see attached media)"
+						: "(no tool output)";
 				// Some providers require the 'name' field in tool results
 				const toolResultMsg: ChatCompletionToolMessageParam = {
 					role: "tool",
-					content: sanitizeSurrogates(
-						hasText ? textResult : supportedMedia.length > 0 ? "(see attached media)" : "",
-					),
+					content: sanitizeSurrogates(toolResultText),
 					tool_call_id: toolMsg.toolCallId,
 				};
 				if (compat.requiresToolResultName && toolMsg.toolName) {

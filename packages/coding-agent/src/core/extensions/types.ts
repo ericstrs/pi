@@ -24,6 +24,7 @@ import type {
 	Model,
 	OAuthCredentials,
 	OAuthLoginCallbacks,
+	ProviderHeaders,
 	SimpleStreamOptions,
 	TextContent,
 	ToolResultMessage,
@@ -53,6 +54,7 @@ import type { ModelRegistry } from "../model-registry.ts";
 import type {
 	BranchSummaryEntry,
 	CompactionEntry,
+	CustomEntry,
 	ReadonlySessionManager,
 	SessionEntry,
 	SessionManager,
@@ -663,6 +665,16 @@ export interface BeforeProviderRequestEvent {
 	payload: unknown;
 }
 
+/**
+ * Fired after request headers are assembled, before the provider HTTP call.
+ * Handlers mutate `headers` in place (e.g. to inject tracing/session headers);
+ * the return value is ignored. A `null` value deletes that header.
+ */
+export interface BeforeProviderHeadersEvent {
+	type: "before_provider_headers";
+	headers: ProviderHeaders;
+}
+
 /** Fired after a provider response is received and before the response stream is consumed. */
 export interface AfterProviderResponseEvent {
 	type: "after_provider_response";
@@ -1005,6 +1017,7 @@ export type ExtensionEvent =
 	| SessionEvent
 	| ContextEvent
 	| BeforeProviderRequestEvent
+	| BeforeProviderHeadersEvent
 	| AfterProviderResponseEvent
 	| BeforeAgentStartEvent
 	| AgentStartEvent
@@ -1094,16 +1107,26 @@ export interface SessionBeforeTreeResult {
 }
 
 // ============================================================================
-// Message Rendering
+// Message and Entry Rendering
 // ============================================================================
 
 export interface MessageRenderOptions {
 	expanded: boolean;
 }
 
+export interface EntryRenderOptions {
+	expanded: boolean;
+}
+
 export type MessageRenderer<T = unknown> = (
 	message: CustomMessage<T>,
 	options: MessageRenderOptions,
+	theme: Theme,
+) => Component | undefined;
+
+export type EntryRenderer<T = unknown> = (
+	entry: CustomEntry<T>,
+	options: EntryRenderOptions,
 	theme: Theme,
 ) => Component | undefined;
 
@@ -1161,6 +1184,7 @@ export interface ExtensionAPI {
 		event: "before_provider_request",
 		handler: ExtensionHandler<BeforeProviderRequestEvent, BeforeProviderRequestEventResult>,
 	): void;
+	on(event: "before_provider_headers", handler: ExtensionHandler<BeforeProviderHeadersEvent>): void;
 	on(event: "after_provider_response", handler: ExtensionHandler<AfterProviderResponseEvent>): void;
 	on(event: "before_agent_start", handler: ExtensionHandler<BeforeAgentStartEvent, BeforeAgentStartEventResult>): void;
 	on(event: "agent_start", handler: ExtensionHandler<AgentStartEvent>): void;
@@ -1224,6 +1248,9 @@ export interface ExtensionAPI {
 
 	/** Register a custom renderer for CustomMessageEntry. */
 	registerMessageRenderer<T = unknown>(customType: string, renderer: MessageRenderer<T>): void;
+
+	/** Register a custom renderer for CustomEntry. Custom entries do not participate in LLM context. */
+	registerEntryRenderer<T = unknown>(customType: string, renderer: EntryRenderer<T>): void;
 
 	// =========================================================================
 	// Actions
@@ -1433,6 +1460,14 @@ export interface ProviderModelConfig {
 /** Extension factory function type. Supports both sync and async initialization. */
 export type ExtensionFactory = (pi: ExtensionAPI) => void | Promise<void>;
 
+export type InlineExtension =
+	| ExtensionFactory
+	| {
+			/** Display name shown as `<inline:name>` in the startup Extensions list. */
+			name: string;
+			factory: ExtensionFactory;
+	  };
+
 // ============================================================================
 // Loaded Extension Types
 // ============================================================================
@@ -1599,6 +1634,7 @@ export interface Extension {
 	handlers: Map<string, HandlerFn[]>;
 	tools: Map<string, RegisteredTool>;
 	messageRenderers: Map<string, MessageRenderer>;
+	entryRenderers?: Map<string, EntryRenderer>;
 	commands: Map<string, RegisteredCommand>;
 	flags: Map<string, ExtensionFlag>;
 	shortcuts: Map<KeyId, ExtensionShortcut>;
