@@ -1400,7 +1400,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 1.25,
 			output: 4.25,
@@ -2535,7 +2535,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
 		thinkingLevelMap: {"xhigh":"xhigh"},
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 1,
 			output: 6,
@@ -2553,7 +2553,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
 		thinkingLevelMap: {"xhigh":"xhigh"},
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 5,
 			output: 30,
@@ -2571,7 +2571,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
 		thinkingLevelMap: {"xhigh":"xhigh"},
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 2.5,
 			output: 15,
@@ -2945,7 +2945,7 @@ export const VERCEL_AI_GATEWAY_MODELS = {
 		provider: "vercel-ai-gateway",
 		baseUrl: "https://ai-gateway.vercel.sh",
 		reasoning: true,
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 2,
 			output: 6,

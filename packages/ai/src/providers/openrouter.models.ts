@@ -759,9 +759,9 @@ export const OPENROUTER_MODELS = {
 		reasoning: true,
 		input: ["text"],
 		cost: {
-			input: 0.2288,
-			output: 0.3432,
-			cacheRead: 0.02288,
+			input: 0.2145,
+			output: 0.32175,
+			cacheRead: 0.02145,
 			cacheWrite: 0,
 		},
 		contextWindow: 131072,
@@ -2807,7 +2807,7 @@ export const OPENROUTER_MODELS = {
 		compat: {"thinkingFormat":"openrouter"},
 		reasoning: true,
 		thinkingLevelMap: {"xhigh":"xhigh","max":"max"},
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 1,
 			output: 6,
@@ -2826,7 +2826,7 @@ export const OPENROUTER_MODELS = {
 		compat: {"thinkingFormat":"openrouter"},
 		reasoning: true,
 		thinkingLevelMap: {"xhigh":"xhigh","max":"max"},
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 1,
 			output: 6,
@@ -2845,7 +2845,7 @@ export const OPENROUTER_MODELS = {
 		compat: {"thinkingFormat":"openrouter"},
 		reasoning: true,
 		thinkingLevelMap: {"xhigh":"xhigh","max":"max"},
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 5,
 			output: 30,
@@ -2864,7 +2864,7 @@ export const OPENROUTER_MODELS = {
 		compat: {"thinkingFormat":"openrouter"},
 		reasoning: true,
 		thinkingLevelMap: {"xhigh":"xhigh","max":"max"},
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 5,
 			output: 30,
@@ -2883,7 +2883,7 @@ export const OPENROUTER_MODELS = {
 		compat: {"thinkingFormat":"openrouter"},
 		reasoning: true,
 		thinkingLevelMap: {"xhigh":"xhigh","max":"max"},
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 2.5,
 			output: 15,
@@ -2902,7 +2902,7 @@ export const OPENROUTER_MODELS = {
 		compat: {"thinkingFormat":"openrouter"},
 		reasoning: true,
 		thinkingLevelMap: {"xhigh":"xhigh","max":"max"},
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 2.5,
 			output: 15,
@@ -4432,7 +4432,7 @@ export const OPENROUTER_MODELS = {
 		baseUrl: "https://openrouter.ai/api/v1",
 		compat: {"supportsDeveloperRole":false,"thinkingFormat":"openrouter"},
 		reasoning: true,
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 2,
 			output: 6,
@@ -4450,7 +4450,7 @@ export const OPENROUTER_MODELS = {
 		baseUrl: "https://openrouter.ai/api/v1",
 		compat: {"supportsDeveloperRole":false,"thinkingFormat":"openrouter"},
 		reasoning: true,
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 1,
 			output: 2,
@@ -4687,13 +4687,13 @@ export const OPENROUTER_MODELS = {
 		thinkingLevelMap: {"xhigh":"xhigh"},
 		input: ["text"],
 		cost: {
-			input: 0.532,
-			output: 1.672,
-			cacheRead: 0.0988,
+			input: 0.92,
+			output: 3,
+			cacheRead: 0.18,
 			cacheWrite: 0,
 		},
 		contextWindow: 1048576,
-		maxTokens: 131072,
+		maxTokens: 1048576,
 	} satisfies Model<"openai-completions">,
 	"z-ai/glm-5v-turbo": {
 		id: "z-ai/glm-5v-turbo",
@@ -4883,7 +4883,7 @@ export const OPENROUTER_MODELS = {
 		baseUrl: "https://openrouter.ai/api/v1",
 		compat: {"supportsDeveloperRole":false,"thinkingFormat":"openrouter"},
 		reasoning: true,
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 2,
 			output: 6,

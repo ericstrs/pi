@@ -614,7 +614,7 @@ export const AZURE_OPENAI_RESPONSES_MODELS = {
 		baseUrl: "",
 		reasoning: true,
 		thinkingLevelMap: {"off":null,"xhigh":"xhigh","max":"max"},
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 1,
 			output: 6,
@@ -632,7 +632,7 @@ export const AZURE_OPENAI_RESPONSES_MODELS = {
 		baseUrl: "",
 		reasoning: true,
 		thinkingLevelMap: {"off":null,"xhigh":"xhigh","max":"max"},
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 5,
 			output: 30,
@@ -650,7 +650,7 @@ export const AZURE_OPENAI_RESPONSES_MODELS = {
 		baseUrl: "",
 		reasoning: true,
 		thinkingLevelMap: {"off":null,"xhigh":"xhigh","max":"max"},
-		input: ["text", "image"],
+		input: ["text", "image", "pdf"],
 		cost: {
 			input: 2.5,
 			output: 15,
