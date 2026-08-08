@@ -1,0 +1,12 @@
+import type { ThinkingContent, ToolCall, UserContent } from "../types.ts";
+
+type Content = UserContent | ThinkingContent | ToolCall;
+
+/** Extract and join text from message content. */
+export function contentText(content: string | readonly Content[], separator = "\n"): string {
+	if (typeof content === "string") return content;
+	return content
+		.filter((block) => block.type === "text")
+		.map((block) => block.text)
+		.join(separator);
+}
